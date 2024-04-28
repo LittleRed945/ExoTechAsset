@@ -1,11 +1,11 @@
 package org.exotechasset.exotechasset.Entity
-import org.exotechasset.exotechasset.Entity.Report
+import org.exotechasset.exotechasset.Entity.AbstractVisitor
 
-class Table(metrics: List<Number>): Report(metrics){
+class CsvVisitor: AbstractVisitor() {
     public override fun visitor(asset:Asset){
-        // Todo
+        // TODO
     }
     public override fun get(){
-        // Todo
+        // TODO
     }
 }
