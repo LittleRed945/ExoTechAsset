@@ -4,3 +4,4 @@ enum class ReportType(val display: String) {
     Table("Table"),
     Chart("Chart"),
 }
+

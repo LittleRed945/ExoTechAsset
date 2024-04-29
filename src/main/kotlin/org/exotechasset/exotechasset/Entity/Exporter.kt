@@ -1,5 +1,4 @@
 package org.exotechasset.exotechasset.Entity
-import org.exotechasset.exotechasset.Entity.AssetListFile
 import org.exotechasset.exotechasset.Entity.ReportType
 
 class Exporter {
