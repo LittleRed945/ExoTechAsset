@@ -1,7 +1,7 @@
 package org.exotechasset.exotechasset.entity
 
-class Changelog {
-    private val changeLog: MutableList<String> = mutableListOf()
+class Changelog(changeLog:List<String> = emptyList()) {
+    private val changeLog: MutableList<String> = changeLog.toMutableList()
 
     public fun get(): List<String> = this.changeLog.toList()
 
