@@ -1,6 +1,4 @@
-package org.exotechasset.exotechasset.Entity
-
-import org.exotechasset.exotechasset.UseCase.AssetGetBy
+package org.exotechasset.exotechasset.entity
 
 class Metric(metrics: MutableMap<AssetGetBy, Any>) {
     private val metrics = metrics

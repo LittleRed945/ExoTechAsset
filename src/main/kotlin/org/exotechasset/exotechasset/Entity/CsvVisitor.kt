@@ -1,5 +1,4 @@
-package org.exotechasset.exotechasset.Entity
-import org.exotechasset.exotechasset.Entity.AbstractVisitor
+package org.exotechasset.exotechasset.entity
 
 class CsvVisitor: AbstractVisitor() {
     public override fun visit(asset:Asset){

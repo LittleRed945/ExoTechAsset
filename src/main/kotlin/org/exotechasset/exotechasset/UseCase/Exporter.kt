@@ -1,10 +1,7 @@
 package org.exotechasset.exotechasset.useCase
 
-class ExporterImporterHandler {
+class Exporter {
 //    public fun export(exportType: ReportType, filePath:String){
-//
-//    }
-//    public fun import(assetListFile: AssetListFile, format: String){
 //
 //    }
 }

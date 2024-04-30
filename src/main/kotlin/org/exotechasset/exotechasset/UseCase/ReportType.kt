@@ -1,4 +1,4 @@
-package org.exotechasset.exotechasset.UseCase
+package org.exotechasset.exotechasset.useCase
 
 enum class ReportType {
     TABLE,

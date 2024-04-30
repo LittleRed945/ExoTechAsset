@@ -1,5 +1,4 @@
-package org.exotechasset.exotechasset.Entity
-import org.exotechasset.exotechasset.FrameworkDriver.AssetListFile
+package org.exotechasset.exotechasset.useCase
 
 abstract class AbstractScanner {
     public abstract fun get(format:String, assetListFile: AssetListFile);

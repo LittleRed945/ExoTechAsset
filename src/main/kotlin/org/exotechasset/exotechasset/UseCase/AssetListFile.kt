@@ -1,4 +1,4 @@
-package org.exotechasset.exotechasset.FrameworkDriver
+package org.exotechasset.exotechasset.useCase
 
 import java.io.BufferedWriter
 import java.nio.charset.StandardCharsets

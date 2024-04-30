@@ -1,53 +1,41 @@
-package org.exotechasset.exotechasset.Entity
-
-import org.exotechasset.exotechasset.UseCase.AssetGetBy
+package org.exotechasset.exotechasset.entity
 
 class PieChart (metrics: Metric): Chart(metrics) {
-    var pieDatas:MutableMap<String, Double> = mutableMapOf<String, Double>()
+    var pieDatas:MutableMap<AssetGetBy, Double> = mutableMapOf<AssetGetBy, Double>()
     public override fun visit(asset:Asset){
         for(metric in metrics.getMetrics()){
+            val value = datas.getValue(metric.key)
             when(metric.key){
                 AssetGetBy.ID -> {
-                    val value = datas["ID"]
                     value.add(asset.getId())
-                    datas.put("ID",value)
                 }
                 AssetGetBy.STATUS -> {
-                    val value = datas["Status"]
-                    value.add(asset.getStatus())
-                    datas.put("Status",value)
+                    value.add(asset.getStatus().toString())
                 }
                 AssetGetBy.ASSIGNEE -> {
-                    val value = datas["Assignee"]
-                    value.add(asset.getAssignee())
-                    datas.put("Assignee",value)
+                    value.add(asset.getAssignee().toString())
                 }
                 AssetGetBy.AUDITDATE -> {
-                    val value = datas["Audit Date"]
-                    value.add(asset.getAuditDate())
-                    datas.put("Audit Date",value)
+                    value.add(asset.getAuditDate().toString())
                 }
                 AssetGetBy.LOCATION -> {
-                    val value = datas["Location"]
-                    value.add(asset.getLocation())
-                    datas.put("Location",value)
+                    value.add(asset.getLocation().toString())
                 }
                 AssetGetBy.CHANGELOG -> {
-                    val value = datas["Changelog"]
-                    value.add(asset.getChangelog())
-                    datas.put("Changelog",value)
+                    value.add(asset.getChangelog().toString())
                 }
             }
+            datas.put(metric.key ,value)
         }
     }
-    public override fun get(): MutableMap<String, Any> {
+    public override fun get(): MutableMap<AssetGetBy, Double> {
 
         var total:Int = 0
         for(data in datas){
             total += data.value.size
         }
         for(data in datas){
-            val partion = data.value.size / total
+            val partion =data.value.size / total * 1.0
             pieDatas.put(data.key, partion)
         }
         return pieDatas

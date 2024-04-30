@@ -1,9 +1,9 @@
-package org.exotechasset.exotechasset.UseCase
-import org.exotechasset.exotechasset.Entity.AbstractVisitor
-import org.exotechasset.exotechasset.Entity.CsvVisitor
+package org.exotechasset.exotechasset.useCase
+
+import org.exotechasset.exotechasset.entity.AbstractVisitor
 
 class VisitorFactory {
-    public fun get(exportType: ReportType): AbstractVisitor{
+    public fun get(exportType: ReportType): AbstractVisitor {
         // TODO
         var csvVisitor: CsvVisitor = CsvVisitor()
         return csvVisitor

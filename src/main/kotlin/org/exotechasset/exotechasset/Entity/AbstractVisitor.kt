@@ -1,6 +1,5 @@
-package org.exotechasset.exotechasset.Entity
+package org.exotechasset.exotechasset.entity
 
-class Asset;
 abstract class AbstractVisitor {
     public abstract fun visit(asset:Asset);
     public abstract fun get():Any;

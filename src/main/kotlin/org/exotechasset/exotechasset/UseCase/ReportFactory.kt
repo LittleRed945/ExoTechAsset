@@ -1,5 +1,5 @@
-package org.exotechasset.exotechasset.UseCase
-import org.exotechasset.exotechasset.Entity.*
+package org.exotechasset.exotechasset.useCase
+import org.exotechasset.exotechasset.entity.*
 
 
 class ReportFactory {

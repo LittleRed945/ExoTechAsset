@@ -1,7 +1,4 @@
-package org.exotechasset.exotechasset.UseCase
-import org.exotechasset.exotechasset.Entity.AbstractScanner
-import org.exotechasset.exotechasset.Entity.CsvScanner
-import org.exotechasset.exotechasset.FrameworkDriver.AssetListFile
+package org.exotechasset.exotechasset.useCase
 
 class ScannerFactory {
     public fun get(format:String, assetListFile: AssetListFile): AbstractScanner{
