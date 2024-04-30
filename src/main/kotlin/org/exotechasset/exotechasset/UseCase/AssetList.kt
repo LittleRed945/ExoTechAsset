@@ -1,5 +1,6 @@
 package org.exotechasset.exotechasset.usecase
 
+import org.exotechasset.exotechasset.entity.AbstractVisitor
 import org.exotechasset.exotechasset.entity.Asset
 
 // TODO: avoid the same id
@@ -51,13 +52,18 @@ class AssetList {
 
     public fun getChildren(): List<Asset> = this.assetList.values.toList()
 
-    public fun createIterator(assetIteratorType: AssetIteratorType): AssetIterator =
-            AssetIteratorFactory(this).create(assetIteratorType)
+    public fun createIterator(
+            assetIteratorType: AssetIteratorType = AssetIteratorType.HIERARCHY
+    ): AssetIterator = AssetIteratorFactory(this).create(assetIteratorType)
 
-    // TODO: implementation
-    // public fun accept(visitor:AbstractVisitor) {
-    //     visitor.visit(this)
-    // }
+    public fun accept(visitor:AbstractVisitor) {
+        val assetIterator:AssetIterator = this.createIterator()
+        while(assetIterator.hasNext()) {
+            assetIterator.next()
+            val asset:Asset = assetIterator.getValue()!!
+            asset.accept(visitor)
+        }
+    }
 
     public fun clone(): AssetList = AssetList(this)
 }
