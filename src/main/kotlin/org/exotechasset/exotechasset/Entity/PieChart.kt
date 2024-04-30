@@ -1,15 +1,10 @@
 package org.exotechasset.exotechasset.Entity
-import org.exotechasset.exotechasset.Entity.Report
+
 import org.exotechasset.exotechasset.UseCase.AssetGetBy
 
-abstract class Chart(metrics: Metric): Report(metrics) {
-    protected var datas: MutableMap<String, MutableList<Any>> = mutableMapOf<String, MutableList<Any>>()
-    public override fun get(): MutableMap<String, MutableList<Any>>{
-        // Todo
-        return datas
-    }
-
-    public override fun visit(asset: Asset) {
+class PieChart (metrics: Metric): Chart(metrics) {
+    var pieDatas:MutableMap<String, Double> = mutableMapOf<String, Double>()
+    public override fun visit(asset:Asset){
         for(metric in metrics.getMetrics()){
             when(metric.key){
                 AssetGetBy.ID -> {
@@ -44,5 +39,17 @@ abstract class Chart(metrics: Metric): Report(metrics) {
                 }
             }
         }
+    }
+    public override fun get(): MutableMap<String, Any> {
+
+        var total:Int = 0
+        for(data in datas){
+            total += data.value.size
+        }
+        for(data in datas){
+            val partion = data.value.size / total
+            pieDatas.put(data.key, partion)
+        }
+        return pieDatas
     }
 }

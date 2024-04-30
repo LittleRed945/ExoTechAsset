@@ -1,15 +1,10 @@
 package org.exotechasset.exotechasset.Entity
-import org.exotechasset.exotechasset.Entity.Report
+
 import org.exotechasset.exotechasset.UseCase.AssetGetBy
 
-abstract class Chart(metrics: Metric): Report(metrics) {
-    protected var datas: MutableMap<String, MutableList<Any>> = mutableMapOf<String, MutableList<Any>>()
-    public override fun get(): MutableMap<String, MutableList<Any>>{
+class BarChart (metrics: Metric): Chart(metrics) {
+    public override fun visit(asset:Asset){
         // Todo
-        return datas
-    }
-
-    public override fun visit(asset: Asset) {
         for(metric in metrics.getMetrics()){
             when(metric.key){
                 AssetGetBy.ID -> {
