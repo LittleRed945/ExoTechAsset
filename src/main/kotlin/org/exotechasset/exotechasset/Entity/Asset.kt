@@ -92,8 +92,7 @@ open class Asset(
         require(false)
     }
 
-    // TODO
-    // public fun accept(visitor:AbstractVisitor) {
-    //     visitor.visit(this)
-    // }
+     public fun accept(visitor:AbstractVisitor) {
+         visitor.visit(this)
+     }
 }
