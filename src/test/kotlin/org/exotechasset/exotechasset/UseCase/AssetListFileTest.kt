@@ -1,5 +1,6 @@
-package org.exotechasset.exotechasset.FrameworkDriver
+package org.exotechasset.exotechasset.usecase
 
+import org.exotechasset.exotechasset.useCase.AssetListFile
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
