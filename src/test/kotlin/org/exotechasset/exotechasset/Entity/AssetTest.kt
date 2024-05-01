@@ -52,21 +52,21 @@ internal class AssetTest {
 
     @Test
     fun testModify() {
-        val asset2 = Asset("As-01", status = AssetStatus.UNDEPLOYABLE)
+        val asset2 = Asset(asset.getId(), status = AssetStatus.UNDEPLOYABLE)
         assertEquals(asset.getId(), asset2.getId())
         asset.modify(asset2)
         assertEquals(AssetStatus.UNDEPLOYABLE, this.asset.getStatus())
     }
 
-//    @Test
-//    fun testAudit() {
-//        val asset1 = Asset("As-01")
-//        val now = Date.ofNow()
-//
-//        asset.audit();
-//
-//        assertEquals(now, this.asset.getAuditDate())
-//    }
+    @Test
+    fun testAudit() {
+        val asset1 = Asset("As-01")
+        val now = Date.ofNow()
+
+        asset.audit(now);
+
+        assertEquals(now, this.asset.getAuditDate())
+    }
     // @Test
     // fun testSetChangelog() {
     //     val newChangelog = Changelog()

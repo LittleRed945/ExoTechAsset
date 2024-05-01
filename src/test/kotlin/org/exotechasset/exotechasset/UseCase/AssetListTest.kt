@@ -49,7 +49,7 @@ internal class AssetListTest {
     }
 
     @Test
-    fun testDeleteAsset() {
+    fun testDeleteAssetById() {
         val asset1 = Asset(id = "asset1")
         val assetList = AssetList(listOf(asset1))
         assetList.deleteAsset("asset1")
@@ -57,16 +57,25 @@ internal class AssetListTest {
         assertFalse(assetList.getAsset("asset1") != null)
     }
 
-//    @Test
-//    fun testAuditAsset() {
-//        val asset1 = Asset(id = "asset1")
-//        val assetList = AssetList(listOf(asset1))
-//
-//
-//        assetList.auditAsset("asset1")
-//        val now = Date.ofNow()
-//        assertEquals(0.5, assetList.getAsset("asset1")?.getAuditDate())
-//    }
+    @Test
+    fun testDeleteAsset() {
+        val asset1 = Asset(id = "asset1")
+        val assetList = AssetList(listOf(asset1))
+        assetList.deleteAsset(asset1)
+
+        assertFalse(assetList.getAsset("asset1") != null)
+    }
+
+    @Test
+    fun testAuditAsset() {
+        val asset1 = Asset(id = "asset1")
+        val assetList = AssetList(listOf(asset1))
+        val now = Date.ofNow()
+
+        assetList.auditAsset("asset1", now)
+
+        assertEquals(now, assetList.getAsset("asset1")?.getAuditDate())
+    }
 
     @Test
     fun testGetChildren() {

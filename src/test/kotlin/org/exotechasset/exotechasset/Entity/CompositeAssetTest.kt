@@ -26,8 +26,8 @@ internal class CompositeAssetTest {
         val child1 = Asset(id = "child1")
         val child2 = Asset(id = "child2")
 
-        compositeAsset.add(child1)
-        compositeAsset.add(child2)
+        compositeAsset.addChild(child1)
+        compositeAsset.addChild(child2)
 
         assertEquals(listOf("child1", "child2"), compositeAsset.getChildrenIdList())
     }
@@ -38,8 +38,8 @@ internal class CompositeAssetTest {
         val child1 = Asset(id = "child1")
         val child2 = Asset(id = "child2")
 
-        compositeAsset.add(child1)
-        compositeAsset.add(child2)
+        compositeAsset.addChild(child1)
+        compositeAsset.addChild(child2)
 
         assertEquals(listOf(child1, child2), compositeAsset.getChildren())
     }
@@ -51,7 +51,7 @@ internal class CompositeAssetTest {
 
         assertEquals(false, compositeAsset.hasChildren())
 
-        compositeAsset.add(child1)
+        compositeAsset.addChild(child1)
 
         assertEquals(true, compositeAsset.hasChildren())
     }
@@ -61,7 +61,7 @@ internal class CompositeAssetTest {
         val compositeAsset = CompositeAsset(id = "parent")
         val child1 = Asset(id = "child1")
 
-        compositeAsset.add(child1)
+        compositeAsset.addChild(child1)
 
         assertEquals(listOf("child1"), compositeAsset.getChildrenIdList())
     }
@@ -71,8 +71,8 @@ internal class CompositeAssetTest {
         val compositeAsset = CompositeAsset(id = "parent")
         val child1 = Asset(id = "child1")
 
-        compositeAsset.add(child1)
-        compositeAsset.remove("child1")
+        compositeAsset.addChild(child1)
+        compositeAsset.removeChild("child1")
 
         assertEquals(false, compositeAsset.hasChildren())
     }
@@ -82,8 +82,8 @@ internal class CompositeAssetTest {
         val compositeAsset = CompositeAsset(id = "parent")
         val child1 = Asset(id = "child1")
 
-        compositeAsset.add(child1)
-        compositeAsset.remove(child1)
+        compositeAsset.addChild(child1)
+        compositeAsset.removeChild(child1)
 
         assertEquals(false, compositeAsset.hasChildren())
     }
@@ -94,7 +94,7 @@ internal class CompositeAssetTest {
         val child1 = Asset(id = "child1")
         val child2 = Asset(id = "child1", status = AssetStatus.UNDEPLOYABLE)
 
-        compositeAsset.add(child1)
+        compositeAsset.addChild(child1)
         compositeAsset.modify(child2)
 
         assertEquals(listOf("child2"), compositeAsset.getChildrenIdList())

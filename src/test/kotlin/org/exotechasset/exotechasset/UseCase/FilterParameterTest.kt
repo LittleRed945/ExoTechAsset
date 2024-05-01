@@ -51,13 +51,13 @@ internal class FilterParameterTest {
         assertEquals("Alice", filterParameter.get(asset))
     }
 
-    //@Test
-//    fun `testGetWithAuditDate`() {
-//        val auditDate = Date.ofNow()
-//        val asset = Asset(id = "AS-01", auditDate = auditDate)
-//        val filterParameter = FilterParameter(By.AUDIT_DATE, null)
-//        assertEquals(auditDate.toString(), filterParameter.get(asset))
-//    }
+    @Test
+    fun `testGetWithAuditDate`() {
+        val auditDate = Date.ofNow()
+        val asset = Asset(id = "AS-01", auditDate = auditDate)
+        val filterParameter = FilterParameter(By.AUDIT_DATE, null)
+        assertEquals(auditDate, filterParameter.get(asset))
+    }
 
     @Test
     fun `testGetWithLocation`() {
