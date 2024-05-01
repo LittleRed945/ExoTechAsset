@@ -91,12 +91,10 @@ internal class CompositeAssetTest {
     @Test
     fun testModify() {
         val compositeAsset = CompositeAsset(id = "parent")
-        val child1 = Asset(id = "child1")
-        val child2 = Asset(id = "child1", status = AssetStatus.UNDEPLOYABLE)
+        val child2 = Asset(id = "parent", status = AssetStatus.UNDEPLOYABLE)
 
-        compositeAsset.addChild(child1)
         compositeAsset.modify(child2)
 
-        assertEquals(listOf("child2"), compositeAsset.getChildrenIdList())
+        assertEquals(AssetStatus.UNDEPLOYABLE, compositeAsset.getStatus())
     }
 }
