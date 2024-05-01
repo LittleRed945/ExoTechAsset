@@ -72,7 +72,7 @@ internal class AssetHierarchyIteratorTest {
         val asset1 = CompositeAsset("AS-01")
         val asset2 = Asset("AS-02")
 
-        asset1.add(asset2)
+        asset1.addChild(asset2)
 
 
         // Create an AssetHierarchyIterator
