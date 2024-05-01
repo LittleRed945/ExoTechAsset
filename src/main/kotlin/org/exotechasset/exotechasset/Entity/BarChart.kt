@@ -3,7 +3,10 @@ package org.exotechasset.exotechasset.entity
 class BarChart (metrics: Metric): Chart(metrics) {
     public override fun visit(asset:Asset){
         for(metric in metrics.getMetrics()){
-            val value = datas.getValue(metric.key)
+            var value:MutableList<Any> = mutableListOf<Any>()
+            if(datas.containsKey(metric.key)) {
+                value = datas.getValue(metric.key)
+            }
             when(metric.key){
                 AssetGetBy.ID -> {
                     value.add(asset.getId())
