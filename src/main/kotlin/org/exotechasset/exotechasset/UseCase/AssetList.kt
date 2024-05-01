@@ -45,9 +45,9 @@ class AssetList {
         this.deleteAsset(id)
     }
 
-    public fun auditAsset(id: String) {
+    public fun auditAsset(id: String, date:Date = Date.ofNow()) {
         val asset: Asset? = this.getAsset(id)
-        asset?.audit()
+        asset?.audit(date)
     }
 
     public fun getChildren(): List<Asset> = this.assetList.values.toList()
