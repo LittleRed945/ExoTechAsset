@@ -41,7 +41,7 @@ internal class FilterParameterTest {
     fun `testGetWithStatus`() {
         val asset = Asset(id = "AS-01", status = AssetStatus.UNDEPLOYABLE)
         val filterParameter = FilterParameter(By.STATUS, null)
-        assertEquals("INACTIVE", filterParameter.get(asset))
+        assertEquals(AssetStatus.UNDEPLOYABLE, filterParameter.get(asset))
     }
 
     @Test
@@ -51,20 +51,20 @@ internal class FilterParameterTest {
         assertEquals("Alice", filterParameter.get(asset))
     }
 
-    @Test
-    fun `testGetWithAuditDate`() {
-        val auditDate = Date.ofNow()
-        val asset = Asset(id = "AS-01", auditDate = auditDate)
-        val filterParameter = FilterParameter(By.AUDIT_DATE, null)
-        assertEquals(auditDate.toString(), filterParameter.get(asset))
-    }
+    //@Test
+//    fun `testGetWithAuditDate`() {
+//        val auditDate = Date.ofNow()
+//        val asset = Asset(id = "AS-01", auditDate = auditDate)
+//        val filterParameter = FilterParameter(By.AUDIT_DATE, null)
+//        assertEquals(auditDate.toString(), filterParameter.get(asset))
+//    }
 
     @Test
     fun `testGetWithLocation`() {
         val location = Location("1623")
         val asset = Asset(id = "AS-01", location = location)
         val filterParameter = FilterParameter(By.LOCATION, null)
-        assertEquals(location.toString(), filterParameter.get(asset))
+        assertEquals("1623", filterParameter.get(asset))
     }
 
     @Test

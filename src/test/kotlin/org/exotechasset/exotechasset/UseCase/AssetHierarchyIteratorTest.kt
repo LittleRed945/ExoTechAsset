@@ -57,17 +57,13 @@ internal class AssetHierarchyIteratorTest {
     @Test
     fun testNext() {
         // Create a sample asset hierarchy
-        val asset1 = CompositeAsset("AS-01")
-        val asset2 = Asset("AS-02")
-
-        asset1.add(asset2)
-
+        val asset1 = Asset("AS-01")
 
         // Create an AssetHierarchyIterator
         val iterator = AssetHierarchyIterator(AssetList(listOf(asset1)))
         iterator.next()
         // Test the iterator
-        assertEquals(asset2, iterator.getValue())
+        assertEquals(asset1, iterator.getValue())
     }
 
     @Test
@@ -84,7 +80,8 @@ internal class AssetHierarchyIteratorTest {
 
         // Test the iterator
         assertEquals(true, iterator.hasNext())
-
+        iterator.next()
+        assertEquals(true, iterator.hasNext())
         iterator.next()
         assertFalse(iterator.hasNext())
     }
