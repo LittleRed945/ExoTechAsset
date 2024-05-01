@@ -2,6 +2,7 @@ package org.exotechasset.exotechasset.usecase
 
 import org.exotechasset.exotechasset.entity.AbstractVisitor
 import org.exotechasset.exotechasset.entity.Asset
+import org.exotechasset.exotechasset.entity.Date
 
 // TODO: avoid the same id
 
@@ -45,9 +46,9 @@ class AssetList {
         this.deleteAsset(id)
     }
 
-    public fun auditAsset(id: String) {
+    public fun auditAsset(id: String, date: Date = Date.ofNow()) {
         val asset: Asset? = this.getAsset(id)
-        asset?.audit()
+        asset?.audit(date)
     }
 
     public fun getChildren(): List<Asset> = this.assetList.values.toList()
@@ -56,11 +57,11 @@ class AssetList {
             assetIteratorType: AssetIteratorType = AssetIteratorType.HIERARCHY
     ): AssetIterator = AssetIteratorFactory(this).create(assetIteratorType)
 
-    public fun accept(visitor:AbstractVisitor) {
-        val assetIterator:AssetIterator = this.createIterator()
-        while(assetIterator.hasNext()) {
+    public fun accept(visitor: AbstractVisitor) {
+        val assetIterator: AssetIterator = this.createIterator()
+        while (assetIterator.hasNext()) {
             assetIterator.next()
-            val asset:Asset = assetIterator.getValue()!!
+            val asset: Asset = assetIterator.getValue()!!
             asset.accept(visitor)
         }
     }

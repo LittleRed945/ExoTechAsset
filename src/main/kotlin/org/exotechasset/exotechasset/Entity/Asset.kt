@@ -80,17 +80,17 @@ open class Asset(
         check(date == this.auditDate)
     }
 
-    public open fun add(asset: Asset) {
+    public open fun addChild(asset: Asset) {
         // TODO: rewrite the exception handling statement
         require(false)
     }
 
-    public open fun remove(id: String) {
+    public open fun removeChild(id: String) {
         // TODO: rewrite the exception handling statement
         require(false)
     }
 
-    public open fun remove(asset: Asset) {
+    public open fun removeChild(asset: Asset) {
         // TODO: rewrite the exception handling statement
         require(false)
     }
