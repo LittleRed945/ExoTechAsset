@@ -44,21 +44,25 @@ import org.exotechasset.exotechasset.usecase.*
 
      @Test
      fun testFilter() {
-         val assetList = listOf(
+         val assetList2 = listOf(
              Asset("AS-01", auditDate = Date(1714402762)),
              Asset("AS-02", auditDate = Date(1717171200)),
              Asset("AS-03", auditDate = Date(1969632000))
          )
 
-         val filterChain = FilterChain(this.assetList)
+         val filterChain = FilterChain(AssetList(assetList2))
 
          val filter = GreaterThanFilter(FilterParameter(FilterParameterBy.AUDIT_DATE, null)
-             , FilterParameter(FilterParameterBy.VALUE, 1714406400.toLong()))
-
+             , FilterParameter(FilterParameterBy.VALUE, 1714402763.toLong()))
+         val filter2 =
+             LessThanFilter(
+                 FilterParameter(FilterParameterBy.AUDIT_DATE, null),
+                 FilterParameter(FilterParameterBy.VALUE, 1969631000.toLong())
+             )
          filterChain.addFilter(filter)
+         filterChain.addFilter(filter2)
 
-
-         assertEquals(listOf(assetList[1], assetList[2]).size, filterChain.filterAsset().size())
+         assertEquals(listOf(assetList2[1])[0].getId(), filterChain.filterAsset().getChildren()[0].getId())
      }
 
 //     @Test
