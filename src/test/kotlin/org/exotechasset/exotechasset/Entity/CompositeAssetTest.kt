@@ -1,7 +1,4 @@
-import org.exotechasset.exotechasset.entity.AssetStatus
-import org.exotechasset.exotechasset.entity.CompositeAsset
-import org.exotechasset.exotechasset.entity.Date
-import org.exotechasset.exotechasset.entity.Location
+import org.exotechasset.exotechasset.entity.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -21,5 +18,85 @@ internal class CompositeAssetTest {
         assertEquals(assignee, asset.getAssignee())
         assertEquals(auditDate, asset.getAuditDate())
         assertEquals(location, asset.getLocation())
+    }
+
+    @Test
+    fun testGetChildrenIdList() {
+        val compositeAsset = CompositeAsset(id = "parent")
+        val child1 = Asset(id = "child1")
+        val child2 = Asset(id = "child2")
+
+        compositeAsset.add(child1)
+        compositeAsset.add(child2)
+
+        assertEquals(listOf("child1", "child2"), compositeAsset.getChildrenIdList())
+    }
+
+    @Test
+    fun testGetChildren() {
+        val compositeAsset = CompositeAsset(id = "parent")
+        val child1 = Asset(id = "child1")
+        val child2 = Asset(id = "child2")
+
+        compositeAsset.add(child1)
+        compositeAsset.add(child2)
+
+        assertEquals(listOf(child1, child2), compositeAsset.getChildren())
+    }
+
+    @Test
+    fun testHasChildren() {
+        val compositeAsset = CompositeAsset(id = "parent")
+        val child1 = Asset(id = "child1")
+
+        assertEquals(false, compositeAsset.hasChildren())
+
+        compositeAsset.add(child1)
+
+        assertEquals(true, compositeAsset.hasChildren())
+    }
+
+    @Test
+    fun testAdd() {
+        val compositeAsset = CompositeAsset(id = "parent")
+        val child1 = Asset(id = "child1")
+
+        compositeAsset.add(child1)
+
+        assertEquals(listOf("child1"), compositeAsset.getChildrenIdList())
+    }
+
+    @Test
+    fun testRemoveById() {
+        val compositeAsset = CompositeAsset(id = "parent")
+        val child1 = Asset(id = "child1")
+
+        compositeAsset.add(child1)
+        compositeAsset.remove("child1")
+
+        assertEquals(false, compositeAsset.hasChildren())
+    }
+
+    @Test
+    fun testRemoveByAsset() {
+        val compositeAsset = CompositeAsset(id = "parent")
+        val child1 = Asset(id = "child1")
+
+        compositeAsset.add(child1)
+        compositeAsset.remove(child1)
+
+        assertEquals(false, compositeAsset.hasChildren())
+    }
+
+    @Test
+    fun testModify() {
+        val compositeAsset = CompositeAsset(id = "parent")
+        val child1 = Asset(id = "child1")
+        val child2 = Asset(id = "child2")
+
+        compositeAsset.add(child1)
+        compositeAsset.modify(child2)
+
+        assertEquals(listOf("child2"), compositeAsset.getChildrenIdList())
     }
 }

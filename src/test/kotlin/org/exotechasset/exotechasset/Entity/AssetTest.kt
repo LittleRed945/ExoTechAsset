@@ -1,9 +1,7 @@
+import org.exotechasset.exotechasset.entity.*
+import java.time.Instant
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.exotechasset.exotechasset.entity.Asset
-import org.exotechasset.exotechasset.entity.AssetStatus
-import org.exotechasset.exotechasset.entity.Date
-import org.exotechasset.exotechasset.entity.Location
 
 internal class AssetTest {
     private val asset: Asset = Asset("AS-01")
@@ -15,7 +13,7 @@ internal class AssetTest {
         assertEquals(null, this.asset.getAssignee())
         assertEquals(null, this.asset.getAuditDate())
         assertEquals(null, this.asset.getLocation())
-        // TODO: assertEquals(Changelog(), this.asset.getChangelog())
+        assertEquals(Changelog(), this.asset.getChangelog())
         assertEquals(emptyList(), this.asset.getChildrenIdList())
     }
 
@@ -47,6 +45,28 @@ internal class AssetTest {
         assertEquals(newLocation, this.asset.getLocation())
     }
 
+    @Test
+    fun testGetDescription() {
+        val description = AssetDescription(description = "")
+        assertEquals(description, asset.getDescription())
+    }
+
+    @Test
+    fun testModify() {
+        val asset2 = Asset("As-02")
+        asset.modify(asset2)
+        assertEquals("AS-02", this.asset.getId())
+    }
+
+    @Test
+    fun testAudit() {
+        val asset1 = Asset("As-01")
+        val now = Date.ofNow()
+
+        asset.audit();
+
+        assertEquals(now, this.asset.getAuditDate())
+    }
     // @Test
     // fun testSetChangelog() {
     //     val newChangelog = Changelog()

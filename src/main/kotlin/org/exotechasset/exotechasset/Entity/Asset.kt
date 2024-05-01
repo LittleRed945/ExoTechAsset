@@ -11,7 +11,8 @@ open class Asset(
         assignee: String? = null,
         auditDate: Date? = null,
         location: Location? = null,
-        changelog: Changelog = Changelog()
+        changelog: Changelog = Changelog(),
+        assetDescription: AssetDescription = AssetDescription("")
 ) {
     private var id: String = id
     private var status: AssetStatus = status
@@ -19,7 +20,7 @@ open class Asset(
     private var auditDate: Date? = auditDate
     private var location: Location? = location
     private var changelog: Changelog = changelog
-
+    private var assetDescription: AssetDescription = assetDescription
     constructor(
             asset: Asset
     ) : this(
@@ -28,7 +29,8 @@ open class Asset(
             asset.getAssignee(),
             asset.getAuditDate(),
             asset.getLocation(),
-            asset.getChangelog()
+            asset.getChangelog(),
+        asset.getDescription()
     ) {}
 
     public fun getId(): String = id
@@ -52,7 +54,7 @@ open class Asset(
         this.location = location
     }
     public fun getChangelog(): Changelog = this.changelog
-
+    public fun getDescription(): AssetDescription = this.assetDescription
     public open fun hasChildren(): Boolean = false
     public open fun getChildrenIdList(): List<String> = emptyList()
     public open fun getChildren(): List<Asset> = emptyList()
@@ -64,11 +66,13 @@ open class Asset(
         this.assignee = asset.assignee
         this.auditDate = asset.auditDate
         this.location = asset.location
+        this.assetDescription = asset.assetDescription
 
         check(asset.status == this.status)
         check(asset.assignee == this.assignee)
         check(asset.auditDate == this.auditDate)
         check(asset.location == this.location)
+        check(asset.assetDescription == this.assetDescription)
     }
 
     public fun audit() {

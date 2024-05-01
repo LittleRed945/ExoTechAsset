@@ -3,6 +3,7 @@ import org.exotechasset.exotechasset.entity.CompositeAsset
 import org.exotechasset.exotechasset.usecase.AssetHierarchyIterator
 import org.exotechasset.exotechasset.usecase.AssetList
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Test
 
 internal class AssetHierarchyIteratorTest {
@@ -51,5 +52,40 @@ internal class AssetHierarchyIteratorTest {
         assertEquals(asset6, iterator.getValue())
 
         assertEquals(false, iterator.hasNext())
+    }
+
+    @Test
+    fun testNext() {
+        // Create a sample asset hierarchy
+        val asset1 = CompositeAsset("AS-01")
+        val asset2 = Asset("AS-02")
+
+        asset1.add(asset2)
+
+
+        // Create an AssetHierarchyIterator
+        val iterator = AssetHierarchyIterator(AssetList(listOf(asset1)))
+        iterator.next()
+        // Test the iterator
+        assertEquals(asset2, iterator.getValue())
+    }
+
+    @Test
+    fun testHasNext() {
+        // Create a sample asset hierarchy
+        val asset1 = CompositeAsset("AS-01")
+        val asset2 = Asset("AS-02")
+
+        asset1.add(asset2)
+
+
+        // Create an AssetHierarchyIterator
+        val iterator = AssetHierarchyIterator(AssetList(listOf(asset1)))
+
+        // Test the iterator
+        assertEquals(true, iterator.hasNext())
+
+        iterator.next()
+        assertFalse(iterator.hasNext())
     }
 }
