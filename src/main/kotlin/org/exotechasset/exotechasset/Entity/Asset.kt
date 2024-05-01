@@ -71,10 +71,9 @@ open class Asset(
         check(asset.location == this.location)
     }
 
-    public fun audit() {
-        val currentDate = Date.ofNow()
-        this.auditDate = currentDate
-        check(currentDate == this.auditDate)
+    public fun audit(date:Date = Date.ofNow()) {
+        this.auditDate = date
+        check(date == this.auditDate)
     }
 
     public open fun add(asset: Asset) {
