@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ExoTechAsset Management System</title>
+        <style>
+            /* Add your CSS styles here */
+            /* This is just a placeholder */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 800px;
+                margin: 20px auto;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            th,
+            td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            .pagination {
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            .pagination button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 8px 16px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin: 0 5px;
+            }
+
+            .pagination button:hover {
+                background-color: #45a049;
+            }
+
+            .assets-per-page {
+                margin-top: 10px;
+                text-align: center;
+            }
+
+            .assets-per-page label {
+                margin-right: 5px;
+            }
+
+            .assets-per-page select {
+                padding: 5px;
+            }
+
+            .add-new-asset-btn {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .add-new-asset-btn button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 8px 16px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            .add-new-asset-btn button:hover {
+                background-color: #45a049;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>ExoTechAsset Management System</h1>
+            <div id="allAssets"></div>
+            <div class="pagination" id="pagination"></div>
+            <div class="assets-per-page">
+                <label for="assetsPerPage">Assets per Page:</label>
+                <select id="assetsPerPage">
+                    <option value="10">10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                    <option value="2000">2000</option>
+                    <option value="5000">5000</option>
+                    <option value="10000">10000</option>
+                    <option value="20000">20000</option>
+                    <option value="50000">50000</option>
+                    <option value="100000">100000</option>
+                </select>
+            </div>
+            <div class="add-new-asset-btn">
+                <button onclick="addNewAsset()">Add New Asset</button>
+            </div>
+        </div>
+
+        <script>
+            let currentPage = 1;
+            let assetsPerPage = 10;
+
+            // Function to paginate assets
+            function paginateAssets(assets, currentPage, assetsPerPage) {
+                const startIndex = (currentPage - 1) * assetsPerPage;
+                const endIndex = startIndex + assetsPerPage;
+                return assets.slice(startIndex, endIndex);
+            }
+
+            // Function to display paginated assets
+            function displayPaginatedAssets(paginatedAssets) {
+                const assetsContainer = document.getElementById('allAssets');
+                assetsContainer.innerHTML = `
+                <h2>All Assets</h2>
+                <table id="assetTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Status</th>
+                            <th>Assignee</th>
+                            <th>Audit Date</th>
+                            <th>Location</th>
+                            <th>Action</th> <!-- New column for actions -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${paginatedAssets.map(asset => `
+                            <tr>
+                                <td>${asset.id}</td>
+                                <td>${asset.status}</td>
+                                <td>${asset.assignee !== null ? asset.assignee : ''}</td>
+                                <td>${asset.auditDate !== null ? asset.auditDate : ''}</td>
+                                <td>${asset.location !== null ? asset.location : ''}</td>
+                                <td>
+                                    <button onclick="modifyAsset('${asset.id}')">Modify</button> <!-- Modify button -->
+                                    <button onclick="deleteAsset('${asset.id}')">Delete</button> <!-- Delete button -->
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            }
+
+            // Function to display pagination controls
+            function displayPaginationControls(totalPages) {
+                const paginationContainer = document.getElementById('pagination');
+                paginationContainer.innerHTML = '';
+
+                // First page button
+                const firstButton = document.createElement('button');
+                firstButton.textContent = '⏮️';
+                firstButton.addEventListener('click', () => {
+                    currentPage = 1;
+                    getAllAssets();
+                });
+                paginationContainer.appendChild(firstButton);
+
+                // Page buttons
+                for (let i = 1; i <= totalPages; i++) {
+                    const button = document.createElement('button');
+                    button.textContent = i;
+                    button.addEventListener('click', () => {
+                        currentPage = i;
+                        getAllAssets();
+                    });
+                    paginationContainer.appendChild(button);
+                }
+
+                // Last page button
+                const lastButton = document.createElement('button');
+                lastButton.textContent = '⏭️';
+                lastButton.addEventListener('click', () => {
+                    currentPage = totalPages;
+                    getAllAssets();
+                });
+                paginationContainer.appendChild(lastButton);
+            }
+
+            // Function to handle changing assets per page
+            document.getElementById('assetsPerPage').addEventListener('change', function () {
+                assetsPerPage = parseInt(this.value);
+                currentPage = 1;
+                getAllAssets();
+            });
+
+            // Function to fetch all assets
+            function getAllAssets() {
+                fetch('/assets')
+                    .then(response => response.json())
+                    .then(data => {
+                        const assets = Object.values(data).sort((a, b) => a.id.localeCompare(b.id));
+                        const totalPages = Math.ceil(assets.length / assetsPerPage);
+                        const paginatedAssets = paginateAssets(assets, currentPage, assetsPerPage);
+                        displayPaginatedAssets(paginatedAssets);
+                        displayPaginationControls(totalPages);
+                    })
+                    .catch(error => console.error('Error fetching assets:', error));
+            }
+
+            // Function to navigate to modify asset page
+            function modifyAsset(id) {
+                window.location.href = `/modifyAsset.html?id=${id}`;
+            }
+
+            // Function to delete an asset
+            function deleteAsset(id) {
+                fetch(`/assets/${id}`, {
+                    method: 'DELETE',
+                })
+                    .then(() => {
+                        getAllAssets(); // Refresh the asset list after deletion
+                    })
+                    .catch(error => console.error('Error deleting asset:', error));
+            }
+
+            // Function to add a new asset
+            function addNewAsset() {
+                window.location.href = '/addAsset.html';
+            }
+
+            // Get all assets when the page loads
+            getAllAssets();
+        </script>
+    </body>
+
+</html>
