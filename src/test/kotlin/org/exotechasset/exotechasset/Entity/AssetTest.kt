@@ -60,7 +60,6 @@ internal class AssetTest {
 
     @Test
     fun testAudit() {
-        val asset1 = Asset("As-01")
         val now = Date.ofNow()
 
         asset.audit(now);
