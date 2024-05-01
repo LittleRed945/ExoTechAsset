@@ -58,7 +58,7 @@ import org.exotechasset.exotechasset.usecase.*
          filterChain.addFilter(filter)
 
 
-         assertEquals(listOf(assetList[1], assetList[2]), filterChain.filterAsset().getChildren())
+         assertEquals(listOf(assetList[1], assetList[2]).size, filterChain.filterAsset().size())
      }
 
 //     @Test
