@@ -53,6 +53,7 @@ internal class AssetTest {
     @Test
     fun testModify() {
         val asset2 = Asset("As-01", status = AssetStatus.UNDEPLOYABLE)
+        assertEquals(asset.getId(), asset2.getId())
         asset.modify(asset2)
         assertEquals(AssetStatus.UNDEPLOYABLE, this.asset.getStatus())
     }

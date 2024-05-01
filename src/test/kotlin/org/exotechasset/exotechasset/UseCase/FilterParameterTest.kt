@@ -64,7 +64,7 @@ internal class FilterParameterTest {
         val location = Location("1623")
         val asset = Asset(id = "AS-01", location = location)
         val filterParameter = FilterParameter(By.LOCATION, null)
-        assertEquals("1623", filterParameter.get(asset))
+        assertEquals(location, filterParameter.get(asset))
     }
 
     @Test
