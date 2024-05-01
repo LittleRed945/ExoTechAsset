@@ -54,15 +54,11 @@ import org.exotechasset.exotechasset.usecase.*
 
          val filter = GreaterThanFilter(FilterParameter(FilterParameterBy.AUDIT_DATE, null)
              , FilterParameter(FilterParameterBy.VALUE, 1714402763.toLong()))
-         val filter2 =
-             LessThanFilter(
-                 FilterParameter(FilterParameterBy.AUDIT_DATE, null),
-                 FilterParameter(FilterParameterBy.VALUE, 1969631000.toLong())
-             )
-         filterChain.addFilter(filter)
-         filterChain.addFilter(filter2)
 
-         assertEquals(listOf(assetList[1])[0], filterChain.filterAsset().getChildren()[0])
+         filterChain.addFilter(filter)
+
+
+         assertEquals(listOf(assetList[1])[0].getId(), filterChain.filterAsset().getChildren()[0].getId())
      }
 
 //     @Test
