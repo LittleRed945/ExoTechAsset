@@ -21,6 +21,6 @@ class TableTest {
         expects.add(expect)
         asset.accept(table);
 
-        assertTrue( table.get().equals(expect));
+        assertTrue( expect == table.get());
     }
 }

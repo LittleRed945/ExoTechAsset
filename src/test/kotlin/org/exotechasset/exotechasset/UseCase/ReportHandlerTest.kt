@@ -36,7 +36,7 @@ class ReportHandlerTest {
         expect.add("Deployable");
         expects.add(expect)
 
-        assertTrue(result.equals(expects))
+        assertTrue(expects == result)
 
     }
     @Test
@@ -59,7 +59,7 @@ class ReportHandlerTest {
         expect.put(AssetGetBy.ID, "Asset 2");
         expect.put(AssetGetBy.STATUS, "Deployable");
 
-        assertTrue(result.equals(expect))
+        assertTrue(expect == result)
     }
     @Test
     fun generatePieChartTest() {
@@ -80,6 +80,6 @@ class ReportHandlerTest {
         expect.put(AssetGetBy.STATUS, 0.5);
 
 
-        assertTrue(result.equals(expect))
+        assertTrue(expect == result)
     }
 }

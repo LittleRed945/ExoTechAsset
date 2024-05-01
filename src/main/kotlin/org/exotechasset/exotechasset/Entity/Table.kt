@@ -3,7 +3,6 @@ package org.exotechasset.exotechasset.entity
 class Table(metrics: Metric): Report(metrics){
     private var datas: MutableList<MutableList<String>> = mutableListOf<MutableList<String>>()
     public override fun visit(asset:Asset){
-        // Todo
         val data = mutableListOf<String>()
         for(metric in metrics.getMetrics()){
             when(metric.key){

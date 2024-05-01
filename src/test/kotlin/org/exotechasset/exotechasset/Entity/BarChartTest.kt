@@ -21,6 +21,6 @@ class BarChartTest {
         expect.put(AssetGetBy.STATUS, "Deployable");
         asset.accept(barChart);
 
-        assertEquals(expect, barChart.get());
+        assertTrue(expect == barChart.get());
     }
 }

@@ -23,6 +23,6 @@ class PieChartTest {
         expect.put(AssetGetBy.STATUS, 0.5);
         asset.accept(pieChart);
 
-        assertEquals(expect, pieChart.get());
+        assertTrue(expect == pieChart.get());
     }
 }
