@@ -12,21 +12,4 @@ class ReportFactory {
         }
         return report
     }
-    public fun generateTable(reportType: ReportType, metrics:Metric) : Report{
-        // TODO
-        var report: Report = Table(metrics)
-        return report
-    }
-
-    public fun generateBarChart(reportType: ReportType, metrics:Metric) : Report{
-        // TODO
-        var report: Report = Table(metrics)
-        return report
-    }
-
-    public fun generatePieChart(reportType: ReportType, metrics:Metric) : Report{
-        // TODO
-        var report: Report = Table(metrics)
-        return report
-    }
 }
