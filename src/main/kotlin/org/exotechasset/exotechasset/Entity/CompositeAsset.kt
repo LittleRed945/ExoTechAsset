@@ -19,14 +19,14 @@ class CompositeAsset(
 
     public override fun hasChildren(): Boolean = (this.children.isEmpty() == false)
 
-    public override fun add(asset: Asset) {
+    public override fun addChild(asset: Asset) {
         val newAssetId: String = asset.getId()
         this.children.put(newAssetId, asset)
 
         check(asset == this.children.get(newAssetId))
     }
 
-    public override fun remove(id: String) {
+    public override fun removeChild(id: String) {
         require(this.children.containsKey(id))
 
         this.children.remove(id)
@@ -34,9 +34,9 @@ class CompositeAsset(
         check(this.children.containsKey(id) == false)
     }
 
-    public override fun remove(asset: Asset) {
+    public override fun removeChild(asset: Asset) {
         val id = asset.getId()
-        this.remove(id)
+        this.removeChild(id)
     }
 
     public override fun modify(asset: Asset) {
