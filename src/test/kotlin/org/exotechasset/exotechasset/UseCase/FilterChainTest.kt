@@ -53,11 +53,11 @@ import org.exotechasset.exotechasset.usecase.*
          val filterChain = FilterChain(this.assetList)
 
          val filter = GreaterThanFilter(FilterParameter(FilterParameterBy.AUDIT_DATE, null)
-             , FilterParameter(FilterParameterBy.VALUE, 1714406400.toLong()))
+             , FilterParameter(FilterParameterBy.VALUE, 1714402763.toLong()))
          val filter2 =
              LessThanFilter(
                  FilterParameter(FilterParameterBy.AUDIT_DATE, null),
-                 FilterParameter(FilterParameterBy.VALUE, 1717172200.toLong())
+                 FilterParameter(FilterParameterBy.VALUE, 1969631000.toLong())
              )
          filterChain.addFilter(filter)
          filterChain.addFilter(filter2)
