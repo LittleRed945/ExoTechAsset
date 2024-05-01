@@ -18,11 +18,11 @@ internal class AssetIteratorFactoryTest {
         val asset6 = Asset("AS-06")
         val asset7 = Asset("AS-07")
 
-        asset1.add(asset2)
-        asset1.add(asset3)
-        asset2.add(asset4)
-        asset2.add(asset5)
-        asset3.add(asset6)
+        asset1.addChild(asset2)
+        asset1.addChild(asset3)
+        asset2.addChild(asset4)
+        asset2.addChild(asset5)
+        asset3.addChild(asset6)
 
         val assetList = AssetList(listOf(asset1, asset7))
 
@@ -72,11 +72,11 @@ internal class AssetIteratorFactoryTest {
         val asset6 = Asset("AS-06")
         val asset7 = CompositeAsset("AS-07")
 
-        asset1.add(asset2)
-        asset1.add(asset3)
-        asset2.add(asset4)
-        asset2.add(asset5)
-        asset3.add(asset6)
+        asset1.addChild(asset2)
+        asset1.addChild(asset3)
+        asset2.addChild(asset4)
+        asset2.addChild(asset5)
+        asset3.addChild(asset6)
 
         val assetList = AssetList(listOf(asset1, asset7))
 
