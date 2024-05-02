@@ -69,7 +69,7 @@
     <body>
         <div class="container">
             <h1>Add New Asset</h1>
-            <form id="addAssetForm">
+            <form id="addAssetForm" onsubmit="submitForm(event)">
                 <label for="id">ID:</label>
                 <input type="text" id="id" name="id">
                 <label for="status">Status:</label>
@@ -88,7 +88,7 @@
                 <label for="description">Description:</label>
                 <input type="text" id="description" name="description">
                 <div class="btn-container">
-                    <button type="button" class="add" onclick="addAsset()">Add Asset</button>
+                    <button type="submit" class="add">Add Asset</button>
                     <button type="button" class="cancel" onclick="cancelAddition()">Cancel</button>
                 </div>
             </form>
@@ -96,12 +96,7 @@
 
         <script>
             // Function to add new asset
-            function addAsset() {
-                const formData = new FormData(document.getElementById('addAssetForm'));
-                const assetData = {};
-                formData.forEach((value, key) => {
-                    assetData[key] = value;
-                });
+            function addAsset(assetData) {
                 fetch('/assets', {
                     method: 'POST',
                     headers: {
@@ -114,6 +109,17 @@
                         window.location.href = '/index.html';
                     })
                     .catch(error => console.error('Error adding new asset:', error));
+            }
+
+            // Function to handle form submission
+            function submitForm(event) {
+                event.preventDefault();
+                const formData = new FormData(document.getElementById('addAssetForm'));
+                const assetData = {};
+                formData.forEach((value, key) => {
+                    assetData[key] = value;
+                });
+                addAsset(assetData);
             }
 
             // Function to cancel addition
