@@ -1,8 +1,7 @@
 package org.exotechasset.exotechasset.entity
+import org.json.JSONObject
 
 
-
-abstract class Chart(metrics: Metric): Report(metrics) {
-    protected var datas: MutableMap<AssetGetBy, MutableList<Any>> = mutableMapOf<AssetGetBy, MutableList<Any>>()
-
+abstract class Chart(metrics: Metric = Metric(), datas: JSONObject = JSONObject()): Report(metrics) {
+    protected var datas: JSONObject = datas
 }

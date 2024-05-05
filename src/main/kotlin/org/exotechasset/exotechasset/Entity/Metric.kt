@@ -1,6 +1,6 @@
 package org.exotechasset.exotechasset.entity
 
-class Metric(metrics: MutableMap<AssetGetBy, Any>) {
+class Metric(metrics: MutableMap<AssetGetBy, Any> = mutableMapOf()) {
     private val metrics = metrics
     public fun addMetrics(assetGetBy: AssetGetBy, any: Any){
         metrics.put(assetGetBy, any)

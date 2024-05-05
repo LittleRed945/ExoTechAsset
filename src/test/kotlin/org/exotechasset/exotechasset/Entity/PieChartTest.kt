@@ -1,28 +1,31 @@
 package org.exotechasset.exotechasset.Entity
 
-import org.exotechasset.exotechasset.entity.Asset
-import org.exotechasset.exotechasset.entity.AssetGetBy
-import org.exotechasset.exotechasset.entity.Metric
-import org.exotechasset.exotechasset.entity.PieChart
+import org.exotechasset.exotechasset.entity.*
+import org.exotechasset.exotechasset.usecase.AssetList
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
+import kotlin.test.assertEquals
 
 class PieChartTest {
 
     @Test
     fun getPieDatas() {
         val metric = Metric(mutableMapOf<AssetGetBy, Any>());
-        metric.addMetrics(AssetGetBy.ID, "1");
-        metric.addMetrics(AssetGetBy.STATUS, "2");
+        metric.addMetrics(AssetGetBy.STATUS, "1");
         var pieChart:PieChart = PieChart(metric);
-        val asset: Asset = Asset("AS-01");
-        var expect:MutableMap<AssetGetBy, Double> = mutableMapOf<AssetGetBy, Double>()
+        val asset1 = Asset("Asset 1", status = AssetStatus.UNDEPLOYABLE)
+        val asset2 = Asset("Asset 2")
+        val asset3 = Asset("Asset 3")
+        val assetList = AssetList()
+        assetList.addNewAsset(asset1)
+        assetList.addNewAsset(asset2)
+        assetList.addNewAsset(asset3)
+        val expect = "{\"Deployable\":2,\"Undeployable\":1}"
 
-        expect.put(AssetGetBy.ID, 0.5);
-        expect.put(AssetGetBy.STATUS, 0.5);
-        asset.accept(pieChart);
+        assetList.accept(pieChart)
 
-        assertTrue(expect == pieChart.get());
+        assertEquals(expect, pieChart.get().toString());
+
     }
 }
