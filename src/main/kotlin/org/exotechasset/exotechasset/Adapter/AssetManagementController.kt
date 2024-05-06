@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class AssetManagementController {
-    private val assetList: AssetList = AssetList()
-    // TODO: private val filterList = FilterList()
-    private val filterChain: FilterChain = FilterChain(this.assetList)
+    private val assetList: AssetList = ServiceController.assetList
 
     @GetMapping("/assets")
     public fun getAssetIdList(): String {
