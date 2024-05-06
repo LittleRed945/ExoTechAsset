@@ -4,9 +4,8 @@ import org.exotechasset.exotechasset.entity.Metric
 import org.exotechasset.exotechasset.entity.Report
 import org.exotechasset.exotechasset.usecase.AssetList
 
-// TODO Change AssetList to AssetHandler
-class ReportHandler(assetList: AssetList) {
-    private var assetList:AssetList = assetList
+class ReportHandler(assetHandler: AssetHandler) {
+    private var assetHandler:AssetHandler = assetHandler
     public fun generateReport(reportType: ReportType, metrics: Metric): Report{
         // TODO
         var report: Report

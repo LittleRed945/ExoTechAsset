@@ -33,7 +33,7 @@ open class Asset(
         asset.getDescription()
     ) {}
 
-    public fun getId(): String = id
+    public fun getId(): String = id.toString()
     public fun getStatus(): AssetStatus = this.status
     public fun setStatus(status: AssetStatus) {
         this.status = status
@@ -55,6 +55,9 @@ open class Asset(
     }
     public fun getChangelog(): Changelog = this.changelog
     public fun getDescription(): AssetDescription = this.assetDescription
+    public fun addChangelog(log: String) {
+        this.changelog.add(log)
+    }
     public open fun hasChildren(): Boolean = false
     public open fun getChildrenIdList(): List<String> = emptyList()
     public open fun getChildren(): List<Asset> = emptyList()
@@ -67,12 +70,13 @@ open class Asset(
         this.auditDate = asset.auditDate
         this.location = asset.location
         this.assetDescription = asset.assetDescription
+        this.addChangelog("Modify asset with ID: $id")
 
         check(asset.status == this.status)
         check(asset.assignee == this.assignee)
         check(asset.auditDate == this.auditDate)
         check(asset.location == this.location)
-        check(asset.assetDescription == this.assetDescription)
+        check(asset.description == this.description)
     }
 
     public fun audit(date:Date = Date.ofNow()) {

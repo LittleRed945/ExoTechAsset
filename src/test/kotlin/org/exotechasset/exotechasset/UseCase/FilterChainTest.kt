@@ -1,23 +1,23 @@
 import org.exotechasset.exotechasset.entity.*
 import org.exotechasset.exotechasset.usecase.*
- import org.junit.jupiter.api.Assertions.assertEquals
- import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
- internal class FilterChainTest {
-     private val assetList = AssetList(listOf(Asset("AS-01"), Asset("AS-02"), Asset("AS-03")))
+internal class FilterChainTest {
+    private val assetHandler = AssetHandler(listOf(Asset("AS-01"), Asset("AS-02"), Asset("AS-03")))
 
-//     @Test
-//     fun testFilterChain() {
-//         val filterChain = FilterChain(this.assetList)
-//         val filter = Filter("Category", "Electronics")
-//
-//         assertEquals(0, filterChain.size())
-//
-//         filterChain.addFilter(filter)
-//
-//         assertEquals(1, filterChain.size())
-//         assertEquals(emptyList<Filter>(), filterChain.getFilterList())
-//     }
+    //     @Test
+    //     fun testFilterChain() {
+    //         val filterChain = FilterChain(this.assetList)
+    //         val filter = Filter("Category", "Electronics")
+    //
+    //         assertEquals(0, filterChain.size())
+    //
+    //         filterChain.addFilter(filter)
+    //
+    //         assertEquals(1, filterChain.size())
+    //         assertEquals(emptyList<Filter>(), filterChain.getFilterList())
+    //     }
     @Test
     fun testGetSize() {
         val filterChain = FilterChain(this.assetList)
@@ -25,57 +25,38 @@ import org.exotechasset.exotechasset.usecase.*
         assertEquals(0, filterChain.size())
     }
 
-     @Test
-     fun testGetFilterList() {
-         val filterChain = FilterChain(this.assetList)
+    @Test
+    fun testGetFilterList() {
+        val filterChain = FilterChain(this.assetHandler)
 
-         assertEquals(emptyList<Filter>(), filterChain.getFilterList())
-     }
+        assertEquals(emptyList<Filter>(), filterChain.getFilterList())
+    }
 
-     @Test
-     fun testAddFilter() {
-         val filterChain = FilterChain(this.assetList)
-         val filter = EqualsToFilter(FilterParameter(FilterParameterBy.ID, null), FilterParameter(FilterParameterBy.VALUE, "AS-01"))
+    @Test
+    fun testAddFilter() {
+        val filterChain = FilterChain(this.assetHandler)
+        val filter = EqualsToFilter(FilterField.ID, "AS-01")
 
-         filterChain.addFilter(filter)
+        filterChain.addFilter(filter)
 
-         assertEquals(listOf(filter), filterChain.getFilterList())
-     }
+        assertEquals(listOf(filter), filterChain.getFilterList())
+    }
 
-     @Test
-     fun testFilter() {
-         val assetList2 = listOf(
-             Asset("AS-01", auditDate = Date(1714402762)),
-             Asset("AS-02", auditDate = Date(1717171200)),
-             Asset("AS-03", auditDate = Date(1969632000))
-         )
+    @Test
+    fun testFilter() {
+        val assetList2 =
+                listOf(
+                        Asset("AS-01", auditDate = Date(1714402762)),
+                        Asset("AS-02", auditDate = Date(1717171200)),
+                        Asset("AS-03", auditDate = Date(1969632000))
+                )
 
-         val filterChain = FilterChain(AssetList(assetList2))
+        val filterChain = FilterChain(AssetHandler(assetList2))
 
-         val filter = GreaterThanFilter(FilterParameter(FilterParameterBy.AUDIT_DATE, null)
-             , FilterParameter(FilterParameterBy.VALUE, 1714402763.toLong()))
-         val filter2 =
-             LessThanFilter(
-                 FilterParameter(FilterParameterBy.AUDIT_DATE, null),
-                 FilterParameter(FilterParameterBy.VALUE, 1969631000.toLong())
-             )
-         filterChain.addFilter(filter)
-         filterChain.addFilter(filter2)
+        filterChain.addFilter(GreaterThanFilter(FilterField.AUDIT_DATE, 1714402763.toLong()))
+        filterChain.addFilter(LessThanFilter(FilterField.AUDIT_DATE, 1969631000.toLong()))
 
-         assertEquals(listOf(assetList2[1])[0].getId(), filterChain.filterAsset().getChildren()[0].getId())
-     }
-
-//     @Test
-//     fun testRemoveFilter() {
-//         val filterChain = FilterChain(this.assetList)
-//         val filter = EqualsToFilter(FilterParameter(FilterParameterBy.ID, null), FilterParameter(FilterParameterBy.VALUE, "AS-01"))
-//         filterChain.addFilter(filter)
-//
-//         filterChain.removeF(filter)
-//
-//         assertEquals(0, filterChain.size())
-//         assertEquals(emptyList<Filter>(), filterChain.getAll())
-//     }
-
-     // Add more test cases as needed
- }
+        assertEquals(1, filterChain.filterAsset().size())
+        assertEquals(assetList2[1].getId(), filterChain.filterAsset().getChildren()[0].getId())
+    }
+}

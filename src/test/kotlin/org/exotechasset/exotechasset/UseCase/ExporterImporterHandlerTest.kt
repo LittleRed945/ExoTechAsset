@@ -22,7 +22,6 @@ class ExporterImporterHandlerTest {
         assetList.addNewAsset(asset2)
         exporterImporterHandler = ExporterImporterHandler()
     }
-    // TODO Change AssetList to AssetHandler
     @Test
     fun exportFileTest() {
         val assetListFile = exporterImporterHandler.exportFile("./test.csv", assetList)
