@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 
 @RestController
 class AssetManagementController {
@@ -46,9 +48,12 @@ class AssetManagementController {
     }
 
     @PostMapping("/assets")
-    fun addAsset(@RequestBody assetDto: AssetDto) {
+    fun addAsset(@RequestBody assetDto: AssetDto, @RequestBody parentId: String? = null) {
         val asset = assetDto.toAsset()
-        this.assetList.addNewAsset(asset)
+        val result:Boolean = this.assetList.addNewAsset(asset, parentId)
+        if (result == false) {
+            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add asset")
+        }
     }
 
     @DeleteMapping("/assets/{id}")
@@ -65,5 +70,10 @@ class AssetManagementController {
         catch(exception: IllegalArgumentException) {
             // TODO
         }
+    }
+
+    @PutMapping("/assets/{id}/audit")
+    fun auditAsset(@PathVariable(value = "id") id: String) {
+        this.assetList.auditAsset(id)
     }
 }

@@ -82,7 +82,7 @@
                 <label for="assignee">Assignee:</label>
                 <input type="text" id="assignee" name="assignee">
                 <label for="auditDate">Audit Date:</label>
-                <input type="text" id="auditDate" name="auditDate">
+                <input type="text" id="auditDate" name="auditDate" readonly> <!-- Set as readonly -->
                 <label for="location">Location:</label>
                 <input type="text" id="location" name="location">
                 <label for="description">Description:</label>
@@ -158,5 +158,4 @@
             window.addEventListener('load', fetchAndPopulateAsset);
         </script>
     </body>
-
 </html>
