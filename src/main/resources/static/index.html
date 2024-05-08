@@ -118,7 +118,7 @@
                 </select>
             </div>
             <div class="add-new-asset-btn">
-                <button onclick="addNewAsset()">Add New Asset</button>
+                <button onclick="addNewAsset()">Add Asset</button>
             </div>
         </div>
 
@@ -137,35 +137,38 @@
             function displayPaginatedAssets(paginatedAssets) {
                 const assetsContainer = document.getElementById('allAssets');
                 assetsContainer.innerHTML = `
-                <h2>Asset Management</h2>
-                <table id="assetTable">
-                    <thead>
+            <h2>Asset Management</h2>
+            <table id="assetTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Status</th>
+                        <th>Assignee</th>
+                        <th>Audit Date</th>
+                        <th>Location</th>
+                        <th>Description</th> <!-- Added Description column -->
+                        <th>Action</th> <!-- New column for actions -->
+                    </tr>
+                </thead>
+                <tbody>
+                    ${paginatedAssets.map(asset => `
                         <tr>
-                            <th>ID</th>
-                            <th>Status</th>
-                            <th>Assignee</th>
-                            <th>Audit Date</th>
-                            <th>Location</th>
-                            <th>Action</th> <!-- New column for actions -->
+                            <td>${asset.id}</td>
+                            <td>${asset.status}</td>
+                            <td>${asset.assignee !== null ? asset.assignee : ''}</td>
+                            <td>${asset.auditDate !== null ? asset.auditDate : ''}</td>
+                            <td>${asset.location !== null ? asset.location : ''}</td>
+                            <td>${asset.description !== null ? asset.description : ''}</td> <!-- Added Description value -->
+                            <td>
+                                <button onclick="modifyAsset('${asset.id}')">Modify</button> <!-- Modify button -->
+                                <button onclick="deleteAsset('${asset.id}')">Delete</button> <!-- Delete button -->
+                                <button onclick="auditAsset('${asset.id}')">Audit</button> <!-- Audit button -->
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        ${paginatedAssets.map(asset => `
-                            <tr>
-                                <td>${asset.id}</td>
-                                <td>${asset.status}</td>
-                                <td>${asset.assignee !== null ? asset.assignee : ''}</td>
-                                <td>${asset.auditDate !== null ? asset.auditDate : ''}</td>
-                                <td>${asset.location !== null ? asset.location : ''}</td>
-                                <td>
-                                    <button onclick="modifyAsset('${asset.id}')">Modify</button> <!-- Modify button -->
-                                    <button onclick="deleteAsset('${asset.id}')">Delete</button> <!-- Delete button -->
-                                </td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            `;
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
             }
 
             // Function to display pagination controls
@@ -240,6 +243,17 @@
                     .catch(error => console.error('Error deleting asset:', error));
             }
 
+            // Function to audit an asset
+            function auditAsset(id) {
+                fetch(`/assets/${id}/audit`, {
+                    method: 'PUT',
+                })
+                    .then(() => {
+                        getAllAssets(); // Refresh the asset list after auditing
+                    })
+                    .catch(error => console.error('Error auditing asset:', error));
+            }
+
             // Function to add a new asset
             function addNewAsset() {
                 window.location.href = '/addAsset.html';
@@ -249,5 +263,4 @@
             getAllAssets();
         </script>
     </body>
-
 </html>

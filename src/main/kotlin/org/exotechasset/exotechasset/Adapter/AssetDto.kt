@@ -20,7 +20,7 @@ data public class AssetDto(
         val location: String?,
         // val changelog: String,
         val description: String,
-// val childrenAssets: String
+        // val childrenAssets: String
 ) : ToStringInterface {
 
     // TODO: private val name: String = ""
@@ -36,7 +36,7 @@ data public class AssetDto(
     // val children: List<String> = asset.getChildren().map { it.getId() }
 
     constructor(
-            asset: Asset
+            asset: Asset,
     ) : this(
             asset.getId(),
             asset.getStatus().toString(),
