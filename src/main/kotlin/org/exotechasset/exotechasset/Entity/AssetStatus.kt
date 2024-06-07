@@ -12,5 +12,5 @@ enum class AssetStatus : ToStringInterface {
     },
     UNDEPLOYABLE {
         override public fun toString(): String = "Undeployable"
-    }
+    };
 }
