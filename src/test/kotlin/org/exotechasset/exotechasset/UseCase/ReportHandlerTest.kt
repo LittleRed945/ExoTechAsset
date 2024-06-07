@@ -3,6 +3,7 @@ package org.exotechasset.exotechasset.UseCase
 
 import org.exotechasset.exotechasset.entity.Asset
 import org.exotechasset.exotechasset.entity.AssetGetBy
+import org.exotechasset.exotechasset.entity.AssetStatus
 import org.exotechasset.exotechasset.entity.Metric
 import org.exotechasset.exotechasset.useCase.ReportHandler
 import org.exotechasset.exotechasset.useCase.ReportType
@@ -27,16 +28,11 @@ class ReportHandlerTest {
         assetList.addNewAsset(asset2)
         val report = ReportHandler(assetList).generateReport(ReportType.TABLE, metric)
         result = report.get()
-        expects = mutableListOf<MutableList<String>>()
-        var expect: MutableList<String> = mutableListOf<String>()
-        expect.add("Asset 1");
-        expect.add("Deployable");
-        expects.add(expect)
-        expect.add("Asset 2");
-        expect.add("Deployable");
-        expects.add(expect)
+        expects = "[{\"id\":\"Asset 1\",\"status\":\"Deployable\"}" +
+                ",{\"id\":\"Asset 2\",\"status\":\"Deployable\"}]"
 
-        assertTrue(expects == result)
+
+        kotlin.test.assertEquals(expects, result.toString());
 
     }
     @Test
@@ -53,33 +49,30 @@ class ReportHandlerTest {
         assetList.addNewAsset(asset2)
         val report = ReportHandler(assetList).generateReport(ReportType.BAR, metric)
         result = report.get()
-        var expect = mutableMapOf<AssetGetBy, Any>()
-        expect.put(AssetGetBy.ID, "Asset 1");
-        expect.put(AssetGetBy.STATUS, "Deployable");
-        expect.put(AssetGetBy.ID, "Asset 2");
-        expect.put(AssetGetBy.STATUS, "Deployable");
+        expects = "{\"id\":[\"Asset 1\",\"Asset 2\"],\"status\":[\"Deployable\",\"Deployable\"]}"
 
-        assertTrue(expect == result)
+
+        kotlin.test.assertEquals(expects, result.toString());
     }
     @Test
     fun generatePieChartTest() {
         val assetList = AssetList()
-        var mutablemap  = mutableMapOf<AssetGetBy, Any>(AssetGetBy.ID to 1, AssetGetBy.STATUS to 2)
-        var metric:Metric = Metric(mutablemap)
+        val metric = Metric(mutableMapOf<AssetGetBy, Any>());
+        metric.addMetrics(AssetGetBy.STATUS, "1");
         var result:Any
         var expects:Any
-        val asset1 = Asset("Asset 1")
+        val asset1 = Asset("Asset 1", status = AssetStatus.UNDEPLOYABLE)
         val asset2 = Asset("Asset 2")
+        val asset3 = Asset("Asset 3")
 
         assetList.addNewAsset(asset1)
         assetList.addNewAsset(asset2)
+        assetList.addNewAsset(asset3)
         val report = ReportHandler(assetList).generateReport(ReportType.PIE, metric)
         result = report.get()
-        var expect = mutableMapOf<AssetGetBy, Any>()
-        expect.put(AssetGetBy.ID, 0.5);
-        expect.put(AssetGetBy.STATUS, 0.5);
+        expects = "{\"Deployable\":2,\"Undeployable\":1}"
 
 
-        assertTrue(expect == result)
+        kotlin.test.assertEquals(expects, result.toString());
     }
 }
