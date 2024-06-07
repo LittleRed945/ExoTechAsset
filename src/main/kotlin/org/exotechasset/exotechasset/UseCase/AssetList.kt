@@ -2,7 +2,6 @@ package org.exotechasset.exotechasset.usecase
 
 import org.exotechasset.exotechasset.entity.AbstractVisitor
 import org.exotechasset.exotechasset.entity.Asset
-import org.exotechasset.exotechasset.entity.CompositeAsset
 import org.exotechasset.exotechasset.entity.Date
 
 // TODO: avoid the same id
@@ -24,19 +23,9 @@ class AssetList {
 
     public fun size() = this.assetList.size
 
-    public fun addNewAsset(asset: Asset, parentId: String? = null): Boolean {
+    public fun addNewAsset(asset: Asset) {
         val id: String = asset.getId()
-        if (parentId != null) {
-            val parentAsset: Asset? = getAsset(parentId)
-            if ((parentAsset == null) || !(parentAsset is CompositeAsset)) {
-                return false
-            }
-            parentAsset.addChild(asset)
-            return true
-        } else {
-            this.assetList.put(id, asset)
-        }
-        return true
+        this.assetList.put(id, asset)
     }
 
     public fun getAsset(id: String): Asset? = this.assetList.get(id)

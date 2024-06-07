@@ -5,8 +5,6 @@ import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter.ISO_DATE_TIME
 
-// TODO: remove dependency
-
 class Date(timestamp: Long, zone: ZoneOffset = ZoneOffset.UTC) {
     private val timestamp: Instant = Instant.ofEpochSecond(timestamp)
     private val zone: ZoneOffset = zone

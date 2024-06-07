@@ -77,6 +77,7 @@ internal class FilterParameterTest {
 
     @Test
     fun `testToStringWithStatus`() {
+        val auditDate = Date.ofNow()
         val asset = Asset(id = "AS-01", status = AssetStatus.UNDEPLOYABLE)
         val filterParameter = FilterParameter(By.STATUS, null)
 
