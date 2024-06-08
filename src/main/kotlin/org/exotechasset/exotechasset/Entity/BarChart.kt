@@ -11,8 +11,8 @@ class BarChart (metrics: Metric = Metric(), datas: JSONObject = JSONObject()): C
                 AssetGetBy.STATUS -> super.datas.accumulate("status", asset.getStatus().toString())
                 AssetGetBy.ASSIGNEE -> super.datas.accumulate("assignee", asset.getAssignee().toString())
                 AssetGetBy.AUDITDATE -> super.datas.accumulate("auditDate", asset.getAuditDate().toString())
-                AssetGetBy.LOCATION -> super.datas.accumulate("location", asset.getLocation().toString())
-                AssetGetBy.CHANGELOG -> super.datas.accumulate("changelog", asset.getChangelog().toString())
+                AssetGetBy.LOCATION -> super.datas.accumulate("location", asset.getLocation()?.get() ?: Location("").get())
+                AssetGetBy.CHANGELOG -> super.datas.accumulate("changelog", asset.getChangelog().get())
             }
         }
     }

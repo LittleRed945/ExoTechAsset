@@ -16,17 +16,16 @@ class AssetListFile(filePath:String) {
         content = result
         val file = File(filePath)
         // Create a FileWriter to write to the file
-        val writer = FileWriter(file)
+        if(!file.exists()){
+            file.createNewFile()
+        }
 
         // Write content to the file
-        writer.write(content)
-
-        // Close the FileWriter
-        writer.close()
+        file.writeText(content)
     }
 
     public fun readCsv(){
-        val bytes = Files.readAllBytes(Paths.get("file.txt"))
+        val bytes = Files.readAllBytes(Paths.get(filePath))
         content = String(bytes, StandardCharsets.UTF_8)
     }
 
