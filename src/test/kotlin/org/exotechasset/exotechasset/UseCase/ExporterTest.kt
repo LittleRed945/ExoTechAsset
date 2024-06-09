@@ -18,9 +18,9 @@ class ExporterTest {
         assetList.addNewAsset(asset1)
         assetList.addNewAsset(asset2)
         val assetListFile = exporter.export("test.csv", assetList)
-        val expect = "\"id\", \"status\", \"assignee\", \"auditDate\", \"location\", \"changelog\"\n" +
-                "\"asset1\", \"Deployable\", \"null\", \"null\", \"\", \"[]\"\n" +
-                "\"asset2\", \"Deployable\", \"null\", \"null\", \"\", \"[]\"\n"
+        val expect = "id, status, assignee, auditDate, location, changelog\n" +
+                "asset1, Deployable, null, null, , []\n" +
+                "asset2, Deployable, null, null, , []\n"
         assetListFile.readCsv()
         assertEquals(expect, assetListFile.getContent())
     }

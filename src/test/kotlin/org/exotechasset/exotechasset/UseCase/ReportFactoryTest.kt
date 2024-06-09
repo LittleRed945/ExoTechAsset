@@ -94,10 +94,10 @@ class ReportFactoryTest {
         val report = reportFactory.generate(ReportType.CSV, metric)
         assetList.accept(report)
         result = report.get()
-        expects = "\"id\", \"status\", \"assignee\", \"auditDate\", \"location\", \"changelog\"\n" +
-                "\"Asset 1\", \"Undeployable\", \"null\", \"null\", \"\", \"[]\"\n" +
-                "\"Asset 2\", \"Deployable\", \"null\", \"null\", \"\", \"[]\"\n" +
-                "\"Asset 3\", \"Deployable\", \"null\", \"null\", \"\", \"[]\"\n"
+        expects = "id, status, assignee, auditDate, location, changelog\n" +
+                "Asset 1, Undeployable, null, null, , []\n" +
+                "Asset 2, Deployable, null, null, , []\n" +
+                "Asset 3, Deployable, null, null, , []\n"
 
         kotlin.test.assertEquals(expects, result.toString());
     }

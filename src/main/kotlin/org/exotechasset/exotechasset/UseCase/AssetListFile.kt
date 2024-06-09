@@ -10,6 +10,7 @@ import java.nio.file.Paths
 
 class AssetListFile(filePath:String) {
     // TODO 未來會把實作依照依賴反轉原則抽離到FrameworkDriver層
+    // TODO Composite Asset
     private var filePath:String = filePath
     private var content: String = ""
     public fun write(result: String){
