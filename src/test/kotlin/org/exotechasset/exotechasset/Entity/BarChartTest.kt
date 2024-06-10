@@ -27,8 +27,8 @@ class BarChartTest {
     @Test
     fun getBarDatas() {
         val metric = Metric(mutableMapOf<AssetGetBy, Any>());
-        metric.addMetrics(AssetGetBy.ID, "1");
-        metric.addMetrics(AssetGetBy.STATUS, "2");
+        metric.addMetrics(AssetGetBy.ID, "y");
+        metric.addMetrics(AssetGetBy.STATUS, "x");
         var barChart: BarChart = BarChart(metric);
         val asset1 = Asset("Asset 1", status = AssetStatus.UNDEPLOYABLE)
         val asset2 = Asset("Asset 2")
@@ -37,7 +37,8 @@ class BarChartTest {
         assetList.addNewAsset(asset1)
         assetList.addNewAsset(asset2)
         assetList.addNewAsset(asset3)
-        val expect = "{\"id\":[\"Asset 1\",\"Asset 2\",\"Asset 3\"],\"status\":[\"Undeployable\",\"Deployable\",\"Deployable\"]}"
+        val expect = "{\"x\":[\"Undeployable\",\"Deployable\"," +
+                "\"Deployable\"],\"y\":[\"Asset 1\",\"Asset 2\",\"Asset 3\"]}"
 
         assetList.accept(barChart)
 

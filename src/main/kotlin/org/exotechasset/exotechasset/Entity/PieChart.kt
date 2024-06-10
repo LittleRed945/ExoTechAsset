@@ -12,7 +12,7 @@ class PieChart (metrics: Metric = Metric(), datas: JSONObject =
                 AssetGetBy.STATUS -> key = asset.getStatus().toString()
                 AssetGetBy.ASSIGNEE -> key = asset.getAssignee().toString()
                 AssetGetBy.AUDITDATE -> key = asset.getAuditDate().toString()
-                AssetGetBy.LOCATION -> key = asset.getLocation().toString()
+                AssetGetBy.LOCATION -> key = asset.getLocation()!!.get()
                 AssetGetBy.CHANGELOG -> key = asset.getChangelog().toString()
             }
             if(super.datas.has(key)){

@@ -22,7 +22,7 @@ class Table(metrics: Metric): Report(metrics){
                     data.accumulate("auditDate", asset.getAuditDate().toString())
                 }
                 AssetGetBy.LOCATION -> {
-                    data.accumulate("location", asset.getLocation().toString())
+                    data.accumulate("location", asset.getLocation()?.get())
                 }
                 AssetGetBy.CHANGELOG -> {
                     data.accumulate("changelog", asset.getChangelog().toString())
