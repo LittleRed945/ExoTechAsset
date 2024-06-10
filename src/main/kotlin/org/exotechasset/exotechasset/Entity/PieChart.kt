@@ -12,8 +12,8 @@ class PieChart (metrics: Metric = Metric(), datas: JSONObject =
                 AssetGetBy.STATUS -> key = asset.getStatus().toString()
                 AssetGetBy.ASSIGNEE -> key = asset.getAssignee().toString()
                 AssetGetBy.AUDITDATE -> key = asset.getAuditDate().toString()
-                AssetGetBy.LOCATION -> key = asset.getLocation()!!.get()
-                AssetGetBy.CHANGELOG -> key = asset.getChangelog().toString()
+                AssetGetBy.LOCATION -> key = asset.getLocation()?.get() ?: Location("").get()
+                AssetGetBy.CHANGELOG -> key = asset.getChangelog().get().toString()
             }
             if(super.datas.has(key)){
                 val value = datas.get(key).toString().toInt() + 1
