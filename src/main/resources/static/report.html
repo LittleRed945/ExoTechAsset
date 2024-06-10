@@ -228,7 +228,7 @@
     }
 
 
-    //TodO: BarChart y point change to data[y]
+    //TodO: BarChart 顯示的y軸不是數值而應該是字串
     // Function to display report based on the report type and data
     function displayReport(reportType, data, xAxisLabel, yAxisLabel) {
         const reportContainer = document.getElementById('reportContainer');
@@ -259,6 +259,8 @@
         `;
             reportContainer.innerHTML = tableHtml;
         } else {
+
+
             // Display the data in a chart
             const chartConfig = {
                 type: reportType === 'barChart' ? 'bar' : 'pie',
@@ -301,9 +303,14 @@
 
     // Function to generate bar chart datasets
     function generateBarChartDatasets(data) {
+        // 自动生成 yCategories，去重并排序
+        const uniqueYValues = Array.from(new Set(data.y)).sort();
+        const yCategories = uniqueYValues;
+        // 将分类标签映射到数值
+        const numericalYData = data.y.map(value => yCategories.indexOf(value) + 1);
         return [{
-            label: 'Value',
-            data: data.y.map(value => ({ x: data.x[data.y.indexOf(value)], y: value })),
+            label: data.x,
+            data: numericalYData,
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
