@@ -38,7 +38,7 @@ class ReportHandlerTest {
     @Test
     fun generateBarChartTest() {
         val assetList = AssetList()
-        var mutablemap  = mutableMapOf<AssetGetBy, Any>(AssetGetBy.ID to "x", AssetGetBy.STATUS to "y")
+        var mutablemap  = mutableMapOf<AssetGetBy, Any>(AssetGetBy.ID to "y", AssetGetBy.STATUS to "x")
         var metric:Metric = Metric(mutablemap)
         var result:Any
         var expects:Any
@@ -49,7 +49,8 @@ class ReportHandlerTest {
         assetList.addNewAsset(asset2)
         val report = ReportHandler(assetList).generateReport(ReportType.BAR, metric)
         result = report.get()
-        expects = "{\"id\":[\"Asset 1\",\"Asset 2\"],\"status\":[\"Deployable\",\"Deployable\"]}"
+        expects =
+                "{\"x\":[\"Deployable\",\"Deployable\"],\"y\":[\"Asset 1\",\"Asset 2\"]}"
 
 
         kotlin.test.assertEquals(expects, result.toString());
