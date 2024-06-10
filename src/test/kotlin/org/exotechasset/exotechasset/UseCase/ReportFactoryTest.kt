@@ -49,7 +49,7 @@ class ReportFactoryTest {
         val report = reportFactory.generate(ReportType.BAR, metric)
         assetList.accept(report)
         result = report.get()
-        expects = "{\"id\":[\"Asset 1\",\"Asset 2\"],\"status\":[\"Deployable\",\"Deployable\"]}"
+        expects = "{\"x\":[\"Asset 1\",\"Asset 2\"],\"y\":[\"Deployable\",\"Deployable\"]}"
 
 
         kotlin.test.assertEquals(expects, result.toString());
