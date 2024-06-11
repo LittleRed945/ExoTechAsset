@@ -112,7 +112,8 @@
 
     <div class="generate-report-btn">
         <button onclick="generateReport()">Generate Report</button>
-        <button type="button" class="cancel" onclick="cancelAddition()">Cancel</button>
+        <button onclick="swapAxes()">Swap Axes</button>
+        <button type="button" class="cancel" onclick="cancelAddition()">back</button>
     </div>
 
     <div id="reportContainer">
@@ -181,7 +182,7 @@
     function checkBarVaild(){
         const reportType = document.getElementById('reportType').value;
         const selectedMetric = document.getElementById('selectedMetric');
-        if (reportType === 'barChart' && (selectedMetric.selectedOptions.length > 2 || selectedMetric.selectedOptions.length < 2)) {
+        if (reportType === 'barChart' && (selectedMetric.selectedOptions.length !== 2)) {
             alert('You must select two metrics for a bar chart.');
             for (let i = 0; i < selectedMetric.options.length; i++) {
                 selectedMetric.options[i].selected = false;
@@ -198,6 +199,10 @@
 
         let reportRequest;
         if (reportType === 'barChart') {
+            if(selectedMetric.length !== 2) {
+                alert('You must select two metrics for a bar chart.');
+                return;
+            }
             reportRequest = {
                 reportType: reportType,
                 metrics: {
@@ -220,15 +225,12 @@
             body: JSON.stringify(reportRequest)
         })
             .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                displayReport(reportType, data, selectedMetric[0], selectedMetric[1]); // Pass selected metrics
+            .then(data => {                console.log(data)
+                displayReport(reportType, data, selectedMetric[0],selectedMetric[1]); // Pass selected metrics
             })
             .catch(error => console.error('Error generating report:', error));
     }
 
-
-    //TodO: BarChart 顯示的y軸不是數值而應該是字串
     // Function to display report based on the report type and data
     function displayReport(reportType, data, xAxisLabel, yAxisLabel) {
         const reportContainer = document.getElementById('reportContainer');
@@ -259,13 +261,11 @@
         `;
             reportContainer.innerHTML = tableHtml;
         } else {
-
-
             // Display the data in a chart
             const chartConfig = {
                 type: reportType === 'barChart' ? 'bar' : 'pie',
                 data: {
-                    labels: reportType === 'barChart' ? data.x : data.y, // Use data.y as labels for bar chart
+                    labels: reportType === 'barChart' ? data.x : Object.keys(data), // Use keys of data for pie chart labels
                     datasets: reportType === 'barChart' ? generateBarChartDatasets(data, xAxisLabel, yAxisLabel) : [{
                         data: Object.values(data),
                         backgroundColor: [
@@ -290,7 +290,17 @@
                 options: {
                     scales: reportType === 'barChart' ? {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    const uniqueYValues = Array.from(new Set(data.y)).sort();
+                                    const yCategories = uniqueYValues;
+                                    // 将分类标签映射到数值
+                                    const numericalYData = data.y.map(value => yCategories.indexOf(value) + 1);
+                                    // Convert value to category from data.y
+                                    return value === 0 ? '0' : data.y[value];
+                                }
+                            }
                         }
                     } : {}
                 }
@@ -300,16 +310,15 @@
         }
     }
 
-
     // Function to generate bar chart datasets
-    function generateBarChartDatasets(data) {
+    function generateBarChartDatasets(data, xAxisLabel, yAxisLabel) {
         // 自动生成 yCategories，去重并排序
         const uniqueYValues = Array.from(new Set(data.y)).sort();
         const yCategories = uniqueYValues;
         // 将分类标签映射到数值
         const numericalYData = data.y.map(value => yCategories.indexOf(value) + 1);
         return [{
-            label: data.x,
+            label: yAxisLabel,
             data: numericalYData,
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
@@ -317,8 +326,28 @@
         }];
     }
 
+// Function to swap axes for bar chart
+    function swapAxes() {
+        const reportType = document.getElementById('reportType').value;
+        if (reportType !== 'barChart') {
+            alert('You can only swap axes for a bar chart.');
+            return;
+        }
+        const selectedMetric = document.getElementById('selectedMetric');
+        if (selectedMetric.selectedOptions.length !== 2) {
+            alert('You must select exactly two metrics to swap axes.');
+            return;
+        }
+
+        const temp = selectedMetric.selectedOptions[0].value;
+        selectedMetric.selectedOptions[0].value = selectedMetric.selectedOptions[1].value;
+        selectedMetric.selectedOptions[1].value = temp;
+        generateReport();
+    }
+
     // Fetch and display assets when the page loads
     fetchAndDisplayAssets();
 </script>
 </body>
 </html>
+
