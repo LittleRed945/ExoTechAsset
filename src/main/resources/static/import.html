@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Import Assets</title>
     <style>
-        /* Add your CSS styles here */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -34,7 +33,7 @@
             margin-right: 10px;
         }
 
-        .form-group input[type="text"] {
+        .form-group input[type="file"] {
             display: inline-block;
             padding: 5px;
             width: 300px;
@@ -64,8 +63,8 @@
 <div class="container">
     <h1>Import Assets</h1>
     <div class="form-group">
-        <label for="filePathInput">Enter file path to import:</label>
-        <input type="text" id="filePathInput" placeholder="Enter the file path">
+        <label for="fileInput">Select CSV file to import:</label>
+        <input type="file" id="fileInput" accept=".csv">
     </div>
     <div class="form-group">
         <button onclick="importAssets()">Import</button>
@@ -75,33 +74,40 @@
 
 <script>
     function importAssets() {
-        const filePathInput = document.getElementById('filePathInput').value;
+        const fileInput = document.getElementById('fileInput').files[0];
 
-        if (!filePathInput) {
-            alert('Please enter a file path.');
+        if (!fileInput) {
+            alert('Please select a file.');
             return;
         }
 
-        const requestData = {
-            filePath: filePathInput
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const fileContent = e.target.result;
+
+            const requestData = {
+                fileContent: fileContent
+            };
+
+            fetch('/import-assets', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Assets imported successfully!');
+                    } else {
+                        alert('Failed to import assets.');
+                    }
+                })
+                .catch(error => console.error('Error importing assets:', error));
         };
 
-        fetch('/import-assets', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestData)
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Assets imported successfully!');
-                } else {
-                    alert('Failed to import assets.');
-                }
-            })
-            .catch(error => console.error('Error importing assets:', error));
+        reader.readAsText(fileInput); // Read file as text
     }
 
     function goToIndex() {

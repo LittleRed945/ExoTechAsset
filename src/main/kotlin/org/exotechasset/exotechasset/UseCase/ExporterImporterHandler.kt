@@ -8,10 +8,8 @@ class ExporterImporterHandler {
         var exporter = Exporter()
         return exporter.export(filePath, assetList)
     }
-    public fun importFile(filePath:String, assetList: AssetList): AssetList{
+    public fun importFile(assetList: AssetList, assetListFile: AssetListFile): AssetList{
         var importer = Importer()
-        var assetListFile = AssetListFile(filePath)
-        assetListFile.readCsv()
         return importer.import(assetList, assetListFile)
     }
 }

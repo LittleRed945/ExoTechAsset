@@ -4,6 +4,7 @@ import org.exotechasset.exotechasset.useCase.AssetListFile
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
+import java.io.File
 import kotlin.math.exp
 
 class AssetListFileTest {
@@ -18,6 +19,17 @@ class AssetListFileTest {
         val result = assetListFile.getContent()
 
         assertEquals(expect, result)
+    }
+
+    @Test
+    fun writeWrongFileTest() {
+        val assetListFile = AssetListFile("./test.csv")
+        val expect = "id, 123\n" +
+                "asset, null\n"
+        assertThrows(IllegalArgumentException::class.java) {
+            assetListFile.write(expect)
+        }
+        assertNotEquals(expect, File("./test.csv").readText())
     }
 //    @Test
 //    fun readFileTest(){

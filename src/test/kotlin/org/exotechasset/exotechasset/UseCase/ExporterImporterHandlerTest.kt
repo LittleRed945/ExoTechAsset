@@ -38,7 +38,7 @@ class ExporterImporterHandlerTest {
         val path = "./test.csv"
         val assetListFile = exporterImporterHandler.exportFile(path, assetList)
         val emptyAssetList = AssetList()
-        val result = exporterImporterHandler.importFile(path, emptyAssetList)
+        val result = exporterImporterHandler.importFile(emptyAssetList, assetListFile)
 
         assertEquals(2, result.size())
         val asset1 = result.getAsset("asset1")
