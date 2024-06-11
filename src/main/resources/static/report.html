@@ -225,7 +225,7 @@
             body: JSON.stringify(reportRequest)
         })
             .then(response => response.json())
-            .then(data => {                console.log(data)
+            .then(data => {
                 displayReport(reportType, data, selectedMetric[0],selectedMetric[1]); // Pass selected metrics
             })
             .catch(error => console.error('Error generating report:', error));
@@ -297,8 +297,10 @@
                                     const yCategories = uniqueYValues;
                                     // 将分类标签映射到数值
                                     const numericalYData = data.y.map(value => yCategories.indexOf(value) + 1);
+
                                     // Convert value to category from data.y
-                                    return value === 0 ? '0' : data.y[value];
+                                    console.log(value, data.y[value]);
+                                    return value === 0 ? '0' : data.y[value-1];
                                 }
                             }
                         }
