@@ -5,7 +5,6 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import org.exotechasset.exotechasset.entity.Asset
-import org.exotechasset.exotechasset.entity.AssetDescription
 import org.exotechasset.exotechasset.entity.AssetStatus
 import org.exotechasset.exotechasset.entity.Date
 import org.exotechasset.exotechasset.entity.Location
@@ -44,7 +43,7 @@ data public class AssetDto(
             asset.getAuditDate().toString(),
             asset.getLocation()?.get(),
             //  asset.getChangelog().get().joinToString(prefix = "[", postfix = "]"),
-            asset.getDescription().getDescription(),
+            asset.getDescription(),
             //  asset.getChildren().map { it.getId() }.joinToString(prefix = "[", postfix = "]")
             )
 
@@ -90,9 +89,9 @@ data public class AssetDto(
                 status,
                 this.assignee,
                 date,
-                if (this.location == null) null else Location(this.location!!),
+                if (this.location == null) null else Location(this.location),
                 // Changelog(this.changelog),
-                assetDescription = AssetDescription(this.description)
+                description = this.description
         )
     }
 

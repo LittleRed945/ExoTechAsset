@@ -6,21 +6,15 @@ import org.exotechasset.exotechasset.entity.AssetStatus.*
 // TODO: record into changelog
 
 open class Asset(
-        id: String,
-        status: AssetStatus = DEPLOYABLE,
-        assignee: String? = null,
-        auditDate: Date? = null,
-        location: Location? = null,
-        changelog: Changelog = Changelog(),
-        assetDescription: AssetDescription = AssetDescription("")
+        private var id: String,
+        private var status: AssetStatus = DEPLOYABLE,
+        private var assignee: String? = null,
+        private var auditDate: Date? = null,
+        private var location: Location? = null,
+        private var changelog: Changelog = Changelog(),
+        private var description: String = ""
 ) {
-    private var id: String = id
-    private var status: AssetStatus = status
-    private var assignee: String? = assignee
-    private var auditDate: Date? = auditDate
-    private var location: Location? = location
-    private var changelog: Changelog = changelog
-    private var assetDescription: AssetDescription = assetDescription
+
     constructor(
             asset: Asset
     ) : this(
@@ -30,7 +24,7 @@ open class Asset(
             asset.getAuditDate(),
             asset.getLocation(),
             asset.getChangelog(),
-        asset.getDescription()
+            asset.getDescription()
     ) {}
 
     public fun getId(): String = id.toString()
@@ -61,10 +55,7 @@ open class Asset(
     public fun addChangelog(log: String) {
         this.changelog.add(log)
     }
-    public fun getDescription(): AssetDescription = this.assetDescription
-    public fun addChangelog(log: String) {
-        this.changelog.add(log)
-    }
+    public fun getDescription(): String = this.description
     public open fun hasChildren(): Boolean = false
     public open fun getChildrenIdList(): List<String> = emptyList()
     public open fun getChildren(): List<Asset> = emptyList()
@@ -76,7 +67,7 @@ open class Asset(
         this.assignee = asset.assignee
         this.auditDate = asset.auditDate
         this.location = asset.location
-        this.assetDescription = asset.assetDescription
+        this.description = asset.description
         this.addChangelog("Modify asset with ID: $id")
 
         check(asset.status == this.status)
