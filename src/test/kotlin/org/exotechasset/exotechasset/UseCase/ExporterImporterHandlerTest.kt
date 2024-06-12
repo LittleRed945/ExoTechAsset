@@ -26,9 +26,9 @@ class ExporterImporterHandlerTest {
     @Test
     fun exportFileTest() {
         val assetListFile = exporterImporterHandler.exportFile("./test.csv")
-        val expect = "id, status, assignee, auditDate, location, changelog\n" +
-                "asset1, Deployable, null, null, , []\n" +
-                "asset2, Deployable, null, null, , []\n"
+        val expect = "id, status, assignee, auditDate, location, changelog, parentId\n" +
+                "asset1, Deployable, null, null, , [], \n" +
+                "asset2, Deployable, null, null, , [], \n"
         assetListFile.readCsv()
         assertEquals(expect, assetListFile.getContent())
     }

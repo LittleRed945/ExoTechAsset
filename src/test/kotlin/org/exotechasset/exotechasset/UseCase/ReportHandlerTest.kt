@@ -91,9 +91,9 @@ class ReportHandlerTest {
         assetHandler.addNewAsset(asset2)
         val report = ReportHandler(assetHandler).generateReport(ReportType.CSV, metric)
         result = report.get()
-        expects = "id, status, assignee, auditDate, location, changelog\n" +
-                "Asset 1, Deployable, null, null, , []\n" +
-                "Asset 2, Deployable, null, null, , []\n"
+        expects = "id, status, assignee, auditDate, location, changelog, parentId\n" +
+                "Asset 1, Deployable, null, null, , [], \n" +
+                "Asset 2, Deployable, null, null, , [], \n"
 
         kotlin.test.assertEquals(expects, result.toString());
     }
