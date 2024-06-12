@@ -7,14 +7,19 @@ import org.exotechasset.exotechasset.usecase.AssetList
 
 class Importer(val assetHandler:AssetHandler) {
     private var builder: Builder = Builder()
-    val ATTRIBUTE_NAMES = listOf("id", "status", "assignee", "auditDate", "location", "changelog", "assetDescription")
+    val ATTRIBUTE_NAMES = listOf("id", "status", "assignee", "auditDate", "location", "changelog", "assetDescription", "parentId")
 
     public fun import(assetListFile: AssetListFile):AssetList{
         val scannerFactory = ScannerFactory()
         val scanner = scannerFactory.get(assetListFile)
         while(scanner.hasNext()){
             val asset = buildAsset(scanner)
-            this.assetHandler.addNewAsset(asset)
+            val parentId = scanner.getNextToken()
+            if(parentId == ""){
+                this.assetHandler.addNewAsset(asset)
+            }else{
+                this.assetHandler.addNewAsset(asset, parentId)
+            }
         }
         return this.assetHandler.cloneAssetList()
     }
@@ -38,8 +43,7 @@ class Importer(val assetHandler:AssetHandler) {
         builder.buildAssetLocation(token)
         token = scanner.getNextToken()
 //        buildAssetChangelog(token)
-        //token = scanner.getNextToken()
-//        buildparentAsset(token)
+
         val asset = builder.get()
         return asset
     }

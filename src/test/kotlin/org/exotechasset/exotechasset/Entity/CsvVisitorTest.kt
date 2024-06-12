@@ -16,9 +16,9 @@ class CsvVisitorTest {
         val assetList = AssetList()
         assetList.addNewAsset(asset1)
         assetList.addNewAsset(asset2)
-        val expect = "id, status, assignee, auditDate, location, changelog\n" +
-                "Asset 1, Undeployable, Kuo, 2024-05-02T00:00:00Z, Room 1623, []\n" +
-                "Asset 2, Deployable, null, null, , []\n"
+        val expect = "id, status, assignee, auditDate, location, changelog, parentId\n" +
+                "Asset 1, Undeployable, Kuo, 2024-05-02T00:00:00Z, Room 1623, [], \n" +
+                "Asset 2, Deployable, null, null, , [], \n"
         assetList.accept(csvVisitor);
 
         kotlin.test.assertEquals(expect, csvVisitor.get());

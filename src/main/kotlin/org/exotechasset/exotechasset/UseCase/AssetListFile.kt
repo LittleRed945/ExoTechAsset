@@ -24,14 +24,14 @@ class AssetListFile() {
     }
 
     private fun validateCsvContent(content: String): Boolean {
-        val expectedHeader = "id, status, assignee, auditDate, location, changelog"
+        val expectedHeader = "id, status, assignee, auditDate, location, changelog, parentId"
         val lines = content.lines()
         return lines.isNotEmpty() && lines[0] == expectedHeader
     }
 
     public fun write(result: String){
         if (!validateCsvContent(result)) {
-            throw IllegalArgumentException("Invalid CSV header. Expected: id,status,assignee,auditDate,location,changelog")
+            throw IllegalArgumentException("Invalid CSV header. Expected: id,status,assignee,auditDate,location,changelog, parentId")
         }
 
         content = result
