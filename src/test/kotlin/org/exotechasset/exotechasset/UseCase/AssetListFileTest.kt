@@ -12,8 +12,8 @@ class AssetListFileTest {
     @Test
     fun writeFileTest() {
         val assetListFile = AssetListFile("./test.csv")
-        val expect = "id, status, assignee, auditDate, location, changelog\n" +
-                "asset, Deployable, null, null, , []\n"
+        val expect = "id, status, assignee, auditDate, location, changelog, parentId\n" +
+                "asset, Deployable, null, null, , [], \n"
         assetListFile.write(expect)
         assetListFile.readCsv()
         val result = assetListFile.getContent()

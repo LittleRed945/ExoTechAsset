@@ -16,8 +16,8 @@ class ImporterTest {
         val assetHandler = AssetHandler()
         importer = Importer(assetHandler)
         assetListFile = AssetListFile("./test.csv")
-        val content = "id, status, assignee, auditDate, location, changelog\n" +
-                "asset1, Deployable, null, null, , []\n"
+        val content = "id, status, assignee, auditDate, location, changelog, parentId\n" +
+                "asset1, Deployable, null, null, , [], \n"
         assetListFile.write(content)
         assetListFile.readCsv()
     }
