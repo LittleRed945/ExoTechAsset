@@ -34,22 +34,4 @@ class Table(metrics: Metric): Report(metrics){
     public override fun get(): JSONArray{
         return this.datas
     }
-
-//    public fun toJSONObject(): JSONObject {
-//        val json = JSONObject()
-//        for(data in this.datas){
-//            for(metric in metrics.getMetrics()) {
-//                when(metric.key){
-//                    AssetGetBy.ID -> json.put("id", data)
-//                    AssetGetBy.STATUS -> json.put("status", data)
-//                    AssetGetBy.ASSIGNEE -> json.put("assignee", data)
-//                    AssetGetBy.AUDITDATE -> json.put("auditDate", data)
-//                    AssetGetBy.LOCATION -> json.put("location", data)
-//                    AssetGetBy.CHANGELOG -> json.put("changelog", data)
-//                }
-//            }
-//        }
-//        return json
-//    }
-
 }

@@ -3,7 +3,6 @@ package org.exotechasset.exotechasset.adapter
 import org.exotechasset.exotechasset.entity.Asset
 import org.exotechasset.exotechasset.usecase.AssetIterator
 import org.exotechasset.exotechasset.usecase.AssetHandler
-import org.exotechasset.exotechasset.usecase.FilterChain
 import org.json.JSONArray
 import org.json.JSONObject
 import org.springframework.web.bind.annotation.GetMapping

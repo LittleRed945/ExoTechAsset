@@ -8,7 +8,6 @@ import java.io.File
 class Exporter(val assetHandler:AssetHandler) {
     
     public fun export(filePath:String): AssetListFile{
-//    public fun export(exportType: ReportType = ReportType.CSV, filePath:String){
 
         var assetListFile:AssetListFile = AssetListFile(filePath)
         var report = ReportFactory().generate(ReportType.CSV)
