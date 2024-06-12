@@ -20,7 +20,7 @@ internal class FilterChainTest {
     //     }
     @Test
     fun testGetSize() {
-        val filterChain = FilterChain(this.assetList)
+        val filterChain = FilterChain(this.assetHandler)
 
         assertEquals(0, filterChain.size())
     }
