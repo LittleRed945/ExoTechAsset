@@ -2,16 +2,19 @@ package org.exotechasset.exotechasset.usecase
 
 import org.exotechasset.exotechasset.entity.Filter
 
-class FilterChain(assetList: AssetList) {
-    private val assetList: AssetList = assetList
+class FilterChain(val assetHandler: AssetHandler) {
     private var filterList: MutableSet<Filter> = mutableSetOf()
 
     public fun addFilter(filter: Filter) {
         this.filterList.add(filter)
     }
 
+    public fun clearFilter() {
+        this.filterList.clear()
+    }
+
     public fun filterAsset(): AssetList {
-        var filteredAssetList = assetList.getChildren()
+        var filteredAssetList = this.assetHandler.getChildren()
         for (filter in this.filterList) {
             filteredAssetList = filter.meet(filteredAssetList)
         }

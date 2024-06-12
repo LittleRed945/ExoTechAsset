@@ -1,8 +1,8 @@
 import org.exotechasset.exotechasset.entity.Asset
 import org.exotechasset.exotechasset.entity.Date
+import org.exotechasset.exotechasset.entity.FilterField
 import org.exotechasset.exotechasset.usecase.EqualsToFilter
-import org.exotechasset.exotechasset.usecase.FilterParameter
-import org.exotechasset.exotechasset.usecase.FilterParameterBy as By
+import org.exotechasset.exotechasset.usecase.FilterValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -16,8 +16,7 @@ internal class EqualsToFilterTest {
 
     @Test
     fun testMeet() {
-        val filter =
-                EqualsToFilter(FilterParameter(By.ID, null), FilterParameter(By.VALUE, "AS-01"))
+        val filter = EqualsToFilter(FilterField.ID, "AS-01" as Comparable<Any>)
         val filteredAssets = filter.meet(assetList)
 
         assertEquals(listOf(assetList[0]), filteredAssets)

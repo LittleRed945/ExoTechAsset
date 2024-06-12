@@ -155,6 +155,9 @@
                 <button onclick="addNewAsset()">Add Asset</button>
             </div>
             <div class="use-case-btn">
+                <button onclick="filter()">Filter Asset</button>
+            </div>
+            <div class="use-case-btn">
                 <button onclick="generateReport()">Generate Report</button>
             </div>
             <div class="use-case-btn">
@@ -298,6 +301,10 @@
             // Function to add a new asset
             function addNewAsset() {
                 window.location.href = '/addAsset.html';
+            }
+            // Function to filter asset
+            function filter() {
+                window.location.href = '/filter.html';
             }
             // Function to generate report
             function generateReport() {

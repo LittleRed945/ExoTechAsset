@@ -46,7 +46,7 @@ internal class AssetTest {
 
     @Test
     fun testGetDescription() {
-        assertEquals("", asset.getDescription().getDescription())
+        assertEquals("", asset.getDescription())
     }
 
     @Test

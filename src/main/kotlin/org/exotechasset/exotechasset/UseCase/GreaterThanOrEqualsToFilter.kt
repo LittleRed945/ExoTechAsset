@@ -2,20 +2,27 @@ package org.exotechasset.exotechasset.usecase
 
 import org.exotechasset.exotechasset.entity.Asset
 import org.exotechasset.exotechasset.entity.Filter
+import org.exotechasset.exotechasset.entity.FilterField
 
-class GreaterThanOrEqualsToFilter(val param1: FilterParameter, val param2: FilterParameter) : Filter {
+class GreaterThanOrEqualsToFilter(field: FilterField, value: Any) : Filter(field, value) {
     override public fun meet(assetList: List<Asset>): List<Asset> {
         var result: MutableList<Asset> = mutableListOf()
         for (asset in assetList) {
-            val get1 = param1.toNumber(asset)
-            val get2 = param2.toNumber(asset)
-            if ((get1 == null) || (get2 == null)) {
+            // asset
+            val assetValue = FilterValue(field).toNumber(asset)
+            if (assetValue == null) {
                 continue
             }
-
-            val num1:Long = get1
-            val num2:Long = get2
-            if (num1 >= num2) {
+            // value
+            var valueNumber:Long? = null
+            if (value is String) {
+                valueNumber = value.toLong()
+            } else if (value is Number) {
+                valueNumber = value.toLong()
+            } else {
+                continue
+            }
+            if (assetValue!! >= valueNumber!!) {
                 result.add(asset)
             }
         }
