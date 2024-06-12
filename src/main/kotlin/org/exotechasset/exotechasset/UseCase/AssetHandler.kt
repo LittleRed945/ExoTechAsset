@@ -43,9 +43,7 @@ class AssetHandler {
 
     public fun getChildren(): List<Asset> = this.assetList.getChildren()
 
-    public fun createIterator(
-            assetIteratorType: AssetIteratorType = AssetIteratorType.HIERARCHY
-    ): AssetIterator = this.assetList.createIterator(assetIteratorType)
+    public fun createIterator(): AssetIterator = this.assetList.createIterator()
 
     public fun accept(visitor: AbstractVisitor) {
         this.assetList.accept(visitor)

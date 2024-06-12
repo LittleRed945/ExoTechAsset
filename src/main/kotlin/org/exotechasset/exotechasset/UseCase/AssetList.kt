@@ -64,9 +64,7 @@ class AssetList {
 
     public fun getChildren(): List<Asset> = this.assetList.values.toList()
 
-    public fun createIterator(
-            assetIteratorType: AssetIteratorType = AssetIteratorType.HIERARCHY
-    ): AssetIterator = AssetIteratorFactory(this).create(assetIteratorType)
+    public fun createIterator(): AssetIterator = AssetIterator(this)
 
     public fun accept(visitor: AbstractVisitor) {
         val assetIterator: AssetIterator = this.createIterator()
