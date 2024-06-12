@@ -13,10 +13,6 @@ import java.time.ZonedDateTime
 class Builder {
     private lateinit var asset:Asset
 
-//    fun buildAsset(id: String, status: AssetStatus, assignee: String?, auditDate: Date?, location: Location?, changelog: Changelog, assetDescription: AssetDescription) {
-//        val asset = Asset(id, status, assignee, auditDate, location, changelog, assetDescription)
-//        assetList.addNewAsset(asset)
-//    }
 
     fun createNewAsset(){
         asset = Asset("")
@@ -25,10 +21,6 @@ class Builder {
         asset = Asset(id)
     }
 
-//    Todo
-//    fun buildAssetDescription(description: String){
-//        asset.setDescription(AssetDescription(description))
-//    }
 
     fun buildAssetStatus(status: String){
         when(status){
@@ -53,14 +45,6 @@ class Builder {
 //            asset.setAuditDate(null)
         }
     }
-//    Todo
-//    fun buildAssetChangelog(changelog: Changelog){
-//        asset.setChangelog(changelog)
-//    }
-    // TODO composite asset
-//    fun buildAssetParentAsset(parent: Asset){
-//        parent.addChild(asset)
-//    }
     fun get(): Asset {
         return asset
     }

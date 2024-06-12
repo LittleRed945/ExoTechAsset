@@ -12,11 +12,6 @@ class CsvScanner: AbstractScanner() {
         scanner = Scanner(assetListFile.getContent())
         scanner.useDelimiter(", |\\n")
     }
-//    public override fun getNextToken(): String{
-//        // TODO
-//        val token = scanner.nextLine()
-//        return token
-//    }
     public override fun getNextToken(): String{
         // TODO
         val token = scanner.next()

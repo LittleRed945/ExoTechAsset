@@ -4,7 +4,7 @@ import org.exotechasset.exotechasset.entity.Asset
 import org.exotechasset.exotechasset.entity.Filter
 import org.exotechasset.exotechasset.usecase.AssetIterator
 import org.exotechasset.exotechasset.usecase.AssetHandler
-import org.exotechasset.exotechasset.usecase.FilterChain
+import org.exotechasset.exotechasset.usecase.FilterHandler
 import org.json.JSONArray
 import org.json.JSONObject
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class FilterController {
     private val assetHandler: AssetHandler = ServiceController.assetHandler
-    private val filterChain: FilterChain = ServiceController.filterChain
+    private val filterHandler: FilterHandler = ServiceController.filterHandler
 
     @GetMapping("/filters")
     public fun getFilterList(): String {
         val json = JSONObject()
         val array = JSONArray()
-        for (filter in this.filterChain.getFilterList()) {
+        for (filter in this.filterHandler.getFilterList()) {
             array.put(FilterDto(filter).toJSONObject())
         }
         json.put("filters", array)
@@ -34,18 +34,18 @@ class FilterController {
     @PostMapping("/filters")
     fun addFilter(@RequestBody filterDto: FilterDto) {
         val filter: Filter = filterDto.toFilter()
-        this.filterChain.addFilter(filter)
+        this.filterHandler.addFilter(filter)
     }
 
     @DeleteMapping("/filters")
     fun clearFilter() {
-        this.filterChain.clearFilter()
+        this.filterHandler.clearFilter()
     }
 
     @GetMapping("/filters/assets")
     public fun getFilterAsset(): String {
         val response: JSONObject = JSONObject()
-        val iterator: AssetIterator = this.filterChain.filterAsset().createIterator()
+        val iterator: AssetIterator = this.filterHandler.filterAsset().createIterator()
         while (iterator.hasNext()) {
             iterator.next()
             val asset: Asset = iterator.getValue()!!
