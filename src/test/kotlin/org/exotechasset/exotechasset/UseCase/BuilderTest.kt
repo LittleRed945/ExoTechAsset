@@ -1,5 +1,4 @@
-package org.exotechasset.exotechasset.UseCase
-
+import org.exotechasset.exotechasset.Usecase.Builder
 import org.exotechasset.exotechasset.entity.Asset
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
