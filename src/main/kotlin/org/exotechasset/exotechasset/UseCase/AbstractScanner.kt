@@ -1,4 +1,4 @@
-package org.exotechasset.exotechasset.usecase
+package org.exotechasset.exotechasset.Usecase
 
 abstract class AbstractScanner {
     //    "TODO: get(String format)?"

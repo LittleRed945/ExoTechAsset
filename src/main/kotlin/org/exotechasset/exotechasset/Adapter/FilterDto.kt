@@ -2,8 +2,8 @@ package org.exotechasset.exotechasset.adapter
 
 import org.exotechasset.exotechasset.entity.Filter
 import org.exotechasset.exotechasset.entity.FilterField
-import org.exotechasset.exotechasset.usecase.FilterFactory
-import org.exotechasset.exotechasset.usecase.FilterType
+import org.exotechasset.exotechasset.Usecase.FilterFactory
+import org.exotechasset.exotechasset.Usecase.FilterType
 import org.json.JSONArray
 import org.json.JSONObject
 

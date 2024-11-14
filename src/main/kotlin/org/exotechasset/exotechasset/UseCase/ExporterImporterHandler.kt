@@ -1,7 +1,7 @@
-package org.exotechasset.exotechasset.usecase
+package org.exotechasset.exotechasset.Usecase
 
-import org.exotechasset.exotechasset.usecase.AssetHandler
-import org.exotechasset.exotechasset.usecase.AssetList
+import org.exotechasset.exotechasset.Usecase.AssetHandler
+import org.exotechasset.exotechasset.Usecase.AssetList
 
 class ExporterImporterHandler(val assetHandler:AssetHandler) {
 

@@ -1,4 +1,4 @@
-package org.exotechasset.exotechasset.usecase
+package org.exotechasset.exotechasset.Usecase
 
 import org.exotechasset.exotechasset.entity.Asset
 import org.exotechasset.exotechasset.entity.Filter
@@ -14,12 +14,11 @@ class EqualsToFilter(field: FilterField, value: Any) : Filter(field, value) {
                 continue
             }
             // value
-            if (!(value is String)) {
-                continue
-            }
-            var valueStr = value as String
-            if (assetStr == valueStr) {
-                result.add(asset)
+            if (value is String) {  // Checks if value is a String
+                val valueStr = value  // No need for 'as String'
+                if (assetStr == valueStr) {
+                    result.add(asset)
+                }
             }
         }
         return result

@@ -2,8 +2,8 @@ package org.exotechasset.exotechasset.Adapter
 
 import ExportRequest
 import org.exotechasset.exotechasset.adapter.ServiceController
-import org.exotechasset.exotechasset.usecase.ExporterImporterHandler
-import org.exotechasset.exotechasset.usecase.AssetHandler
+import org.exotechasset.exotechasset.Usecase.ExporterImporterHandler
+import org.exotechasset.exotechasset.Usecase.AssetHandler
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping

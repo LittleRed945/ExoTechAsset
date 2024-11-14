@@ -1,13 +1,13 @@
-package org.exotechasset.exotechasset.UseCase
+package org.exotechasset.exotechasset.Usecase
 
 
 import org.exotechasset.exotechasset.entity.Asset
 import org.exotechasset.exotechasset.entity.AssetGetBy
 import org.exotechasset.exotechasset.entity.AssetStatus
 import org.exotechasset.exotechasset.entity.Metric
-import org.exotechasset.exotechasset.usecase.ReportHandler
-import org.exotechasset.exotechasset.usecase.ReportType
-import org.exotechasset.exotechasset.usecase.AssetHandler
+import org.exotechasset.exotechasset.Usecase.ReportHandler
+import org.exotechasset.exotechasset.Usecase.ReportType
+import org.exotechasset.exotechasset.Usecase.AssetHandler
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

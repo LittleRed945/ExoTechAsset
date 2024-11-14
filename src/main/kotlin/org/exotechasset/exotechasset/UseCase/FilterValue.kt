@@ -1,4 +1,4 @@
-package org.exotechasset.exotechasset.usecase
+package org.exotechasset.exotechasset.Usecase
 
 import org.exotechasset.exotechasset.entity.Asset
 import org.exotechasset.exotechasset.entity.FilterField

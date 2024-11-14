@@ -1,16 +1,16 @@
-package org.exotechasset.exotechasset.UseCase
+package org.exotechasset.exotechasset.Usecase
 
 import org.exotechasset.exotechasset.entity.Asset
 import org.exotechasset.exotechasset.entity.AssetStatus
 import org.exotechasset.exotechasset.entity.Date
 import org.exotechasset.exotechasset.entity.Location
-import org.exotechasset.exotechasset.usecase.AbstractScanner
-import org.exotechasset.exotechasset.usecase.CsvScanner
+import org.exotechasset.exotechasset.Usecase.AbstractScanner
+import org.exotechasset.exotechasset.Usecase.CsvScanner
 import java.time.Instant
 import java.time.ZonedDateTime
 
 
-class Builder {
+public class Builder {
     private lateinit var asset:Asset
 
 

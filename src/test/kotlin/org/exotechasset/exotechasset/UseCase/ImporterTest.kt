@@ -1,7 +1,7 @@
-package org.exotechasset.exotechasset.UseCase
+package org.exotechasset.exotechasset.Usecase
 
-import org.exotechasset.exotechasset.usecase.*
-import org.exotechasset.exotechasset.usecase.AssetHandler
+import org.exotechasset.exotechasset.Usecase.*
+import org.exotechasset.exotechasset.Usecase.AssetHandler
 import org.junit.jupiter.api.BeforeEach
 
 import org.junit.jupiter.api.Assertions.*

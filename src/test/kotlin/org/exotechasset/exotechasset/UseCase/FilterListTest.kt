@@ -1,5 +1,5 @@
 import org.exotechasset.exotechasset.entity.*
-import org.exotechasset.exotechasset.usecase.*
+import org.exotechasset.exotechasset.Usecase.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

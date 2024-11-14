@@ -1,7 +1,7 @@
 import org.exotechasset.exotechasset.entity.Asset
 import org.exotechasset.exotechasset.entity.Date
 import org.exotechasset.exotechasset.entity.FilterField
-import org.exotechasset.exotechasset.usecase.LessThanOrEqualsToFilter
+import org.exotechasset.exotechasset.Usecase.LessThanOrEqualsToFilter
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

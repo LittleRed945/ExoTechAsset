@@ -1,8 +1,8 @@
-package org.exotechasset.exotechasset.UseCase
+package org.exotechasset.exotechasset.Usecase
 
 import org.exotechasset.exotechasset.entity.Asset
-import org.exotechasset.exotechasset.usecase.Exporter
-import org.exotechasset.exotechasset.usecase.AssetHandler
+import org.exotechasset.exotechasset.Usecase.Exporter
+import org.exotechasset.exotechasset.Usecase.AssetHandler
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

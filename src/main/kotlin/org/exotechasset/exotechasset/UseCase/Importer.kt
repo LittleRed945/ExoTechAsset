@@ -1,9 +1,9 @@
-package org.exotechasset.exotechasset.usecase
+package org.exotechasset.exotechasset.Usecase
 
-import org.exotechasset.exotechasset.UseCase.Builder
+import org.exotechasset.exotechasset.Usecase.Builder
 import org.exotechasset.exotechasset.entity.Asset
-import org.exotechasset.exotechasset.usecase.AssetHandler
-import org.exotechasset.exotechasset.usecase.AssetList
+import org.exotechasset.exotechasset.Usecase.AssetHandler
+import org.exotechasset.exotechasset.Usecase.AssetList
 
 class Importer(val assetHandler:AssetHandler) {
     private var builder: Builder = Builder()

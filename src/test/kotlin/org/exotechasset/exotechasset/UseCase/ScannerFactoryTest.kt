@@ -1,8 +1,8 @@
-package org.exotechasset.exotechasset.UseCase
+package org.exotechasset.exotechasset.Usecase
 
-import org.exotechasset.exotechasset.usecase.AssetListFile
-import org.exotechasset.exotechasset.usecase.CsvScanner
-import org.exotechasset.exotechasset.usecase.ScannerFactory
+import org.exotechasset.exotechasset.Usecase.AssetListFile
+import org.exotechasset.exotechasset.Usecase.CsvScanner
+import org.exotechasset.exotechasset.Usecase.ScannerFactory
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

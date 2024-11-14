@@ -1,4 +1,4 @@
-package org.exotechasset.exotechasset.usecase
+package org.exotechasset.exotechasset.Usecase
 
 import java.io.BufferedWriter
 import java.nio.charset.StandardCharsets

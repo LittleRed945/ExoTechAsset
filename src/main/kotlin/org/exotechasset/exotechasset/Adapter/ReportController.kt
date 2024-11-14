@@ -6,9 +6,9 @@ import org.exotechasset.exotechasset.entity.Asset
 import org.exotechasset.exotechasset.entity.AssetGetBy
 import org.exotechasset.exotechasset.entity.Metric
 import org.exotechasset.exotechasset.entity.Report
-import org.exotechasset.exotechasset.usecase.ReportHandler
-import org.exotechasset.exotechasset.usecase.ReportType
-import org.exotechasset.exotechasset.usecase.AssetHandler
+import org.exotechasset.exotechasset.Usecase.ReportHandler
+import org.exotechasset.exotechasset.Usecase.ReportType
+import org.exotechasset.exotechasset.Usecase.AssetHandler
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

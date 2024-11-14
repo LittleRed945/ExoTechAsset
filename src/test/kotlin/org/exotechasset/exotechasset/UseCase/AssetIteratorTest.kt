@@ -1,6 +1,6 @@
 import org.exotechasset.exotechasset.entity.Asset
-import org.exotechasset.exotechasset.usecase.AssetIterator
-import org.exotechasset.exotechasset.usecase.AssetList
+import org.exotechasset.exotechasset.Usecase.AssetIterator
+import org.exotechasset.exotechasset.Usecase.AssetList
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
